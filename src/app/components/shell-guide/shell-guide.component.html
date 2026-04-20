@@ -144,6 +144,13 @@
           <code>chmod</code> modifică permisiunile unui fișier sau director.
         </p>
 
+        <div style="text-align: center; margin: 24px 0;">
+        <img
+          src="https://raw.githubusercontent.com/dianaelena1/os-app-guide/main/src/assets/images/labs/lab3/chmod.png"
+          alt="chmod diagram"
+          style="width: 65%; border-radius: 16px;">
+      </div>
+
         <div class="example">
           <div class="mini">
             <h3>Simbolic</h3>
@@ -558,7 +565,21 @@ awk -F: '&#123;print $1&#125;' /etc/passwd</code></pre>
   <!-- 🧩 COMMAND STRUCTURE -->
   <h3>Structura unei comenzi</h3>
   <div class="mini">
-    <pre><code>comanda [opțiuni] [valori]</code></pre>
+    <div
+  style="
+    font-family: Consolas, Menlo, monospace;
+    background: #020617;
+    border: 1px solid #334155;
+    padding: 14px 16px;
+    border-radius: 16px;
+    display: inline-block;
+    color: #e2e8f0;
+  "
+>
+  <span style="color: #ffffff;">comanda</span>
+  <span style="color: #22c55e; margin: 0 6px;">[opțiuni]</span>
+  <span style="color: #38bdf8;">[valori]</span>
+</div>
 
     <ul>
       <li><strong>comanda</strong> – ex: <code>ls</code>, <code>cd</code></li>
@@ -597,11 +618,21 @@ ls -a</code></pre>
       <p class="muted">Listare fișiere</p>
     </div>
 
-    <div class="flashcard">
+  <div class="flashcard">
       <strong>man</strong>
       <pre><code>man ls</code></pre>
-      <p class="muted">Manual comenzi</p>
-    </div>
+  <p class="muted">
+  <a
+    href="https://linux.die.net/man/"
+    target="_blank"
+    rel="noopener noreferrer"
+    style="color: #3974c7; text-decoration: none;"
+  >
+    Manual comenzi
+  </a>
+</p>
+  </div>
+
   </div>
 
   <!-- 🔥 DATA STREAMS -->
@@ -609,7 +640,7 @@ ls -a</code></pre>
 
 <div style="text-align: center; margin: 20px 0;">
   <img
-    src="https://raw.githubusercontent.com/dianaelena1/os-app-guide/main/src/assets/images/labs/lab2/data-streams-dark.png"
+    src="https://raw.githubusercontent.com/dianaelena1/os-app-guide/main/src/assets/images/labs/lab2/data-streams.png"
     alt="Data Streams Diagram"
     style="width: 45%; border-radius: 16px;">
 </div>
