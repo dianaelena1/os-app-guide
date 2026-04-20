@@ -605,26 +605,38 @@ ls -a</code></pre>
   </div>
 
   <!-- 🔥 DATA STREAMS -->
-  <h3>Data Streams</h3>
+<h3>Data Streams</h3>
 
-  <table class="table">
-    <tr>
-      <th>Stream</th>
-      <th>Descriere</th>
-    </tr>
-    <tr>
-      <td><code>stdin (0)</code></td>
-      <td>Input – tastatura</td>
-    </tr>
-    <tr>
-      <td><code>stdout (1)</code></td>
-      <td>Output – ecran</td>
-    </tr>
-    <tr>
-      <td><code>stderr (2)</code></td>
-      <td>Erori – ecran</td>
-    </tr>
-  </table>
+<div style="text-align: center; margin: 20px 0;">
+  <img
+    src="https://raw.githubusercontent.com/dianaelena1/os-app-guide/main/src/assets/images/labs/lab2/data-streams-dark.png"
+    alt="Data Streams Diagram"
+    style="width: 45%; border-radius: 16px;">
+</div>
+
+<p class="muted">
+  Un program primește date prin <code>stdin</code>, afișează rezultatul normal prin
+  <code>stdout</code> și afișează erorile prin <code>stderr</code>.
+</p>
+
+<table class="table">
+  <tr>
+    <th>Stream</th>
+    <th>Descriere</th>
+  </tr>
+  <tr>
+    <td><code>stdin (0)</code></td>
+    <td>Input – tastatura</td>
+  </tr>
+  <tr>
+    <td><code>stdout (1)</code></td>
+    <td>Output – ecran</td>
+  </tr>
+  <tr>
+    <td><code>stderr (2)</code></td>
+    <td>Erori – ecran</td>
+  </tr>
+</table>
 
   <!-- 🔥 REDIRECTION -->
   <h3>Redirection</h3>
@@ -641,12 +653,12 @@ sort < file1 > file2</code></pre>
 
   <!-- PIPE -->
   <h3>Pipes – legătura între comenzi</h3>
-
-  <img 
-  src="https://raw.githubusercontent.com/dianaelena1/os-app-guide/main/src/assets/images/labs/lab1/pipe-dark.png"
+<div style="text-align: center; margin: 20px 0;">
+<img 
+  src="https://raw.githubusercontent.com/dianaelena1/os-app-guide/main/src/assets/images/labs/lab2/pipe-dark.png"
   alt="Pipe Diagram"
-  style="width:100%; border-radius:16px; margin:20px 0;">
-
+  style="width:50%; border-radius:16px; margin:20px 0;">
+</div>
 <p>
   Un <strong>pipe</strong> este un mecanism de comunicare între procese (IPC).
   În shell, este reprezentat prin simbolul <code>|</code>.
