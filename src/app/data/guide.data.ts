@@ -2,7 +2,7 @@ import { BadgeItem, GuideTab, QuizQuestion } from "../models/guide.models";
 
 export const GUIDE_TABS: GuideTab[] = [
   { id: "overview", label: "Overview" },
-  { id: "basics", label: "Bash basics" },
+  { id: "basics", label: "Basics" },
   { id: "ls", label: "ls" },
   { id: "chmod", label: "chmod" },
   { id: "grep", label: "grep" },
