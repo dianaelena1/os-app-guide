@@ -639,19 +639,56 @@ sort < file1 > file2</code></pre>
     <li><code>&lt;</code> – input din fișier</li>
   </ul>
 
-  <!-- 🔥 PIPE -->
-  <h3>Pipes</h3>
+  <!-- PIPE -->
+  <h3>Pipes – legătura între comenzi</h3>
 
-  <pre><code>cat file.txt | sort
-ls | grep test
-who | sort</code></pre>
+  <img 
+  src="https://raw.githubusercontent.com/dianaelena1/os-app-guide/main/src/assets/images/labs/lab1/pipe-dark.png"
+  alt="Pipe Diagram"
+  style="width:100%; border-radius:16px; margin:20px 0;">
 
-  <p class="muted">
-    Pipe (<code>|</code>) trimite output-ul unei comenzi ca input pentru alta comandă.
-  </p>
+<p>
+  Un <strong>pipe</strong> este un mecanism de comunicare între procese (IPC).
+  În shell, este reprezentat prin simbolul <code>|</code>.
+</p>
+
+<ul>
+  <li>
+    Output-ul unei comenzi (<code>stdout</code>) devine input pentru alta (<code>stdin</code>)
+  </li>
+  <li>
+    Permite combinarea comenzilor în <strong>pipeline-uri</strong>
+  </li>
+  <li>
+    Evită folosirea fișierelor intermediare
+  </li>
+</ul>
+
+<div class="example">
+  <div class="mini">
+    <h3>Exemplu simplu</h3>
+    <pre><code>grep error log.txt | wc -l</code></pre>
+    <p class="muted">
+      Caută liniile cu "error" și le numără
+    </p>
+  </div>
+
+  <div class="mini">
+    <h3>Exemplu din slide</h3>
+    <pre><code>cat file1 file2 file3 | sort > dev/lp</code></pre>
+    <p class="muted">
+      Concatenează fișierele, sortează rezultatul și îl trimite mai departe
+    </p>
+  </div>
+</div>
+
+<p class="warn">
+  Greșeală frecventă: studenții folosesc fișiere temporare în loc de pipe-uri.
+  De multe ori, un <code>|</code> rezolvă problema mai elegant.
+</p>
 
   <!-- 🧠 EXPLANATION -->
-  <h3>De ce folosim pipe?</h3>
+  <h4>De ce folosim pipe?</h4>
 
   <pre><code>cat file.txt | grep error | wc -l</code></pre>
 
