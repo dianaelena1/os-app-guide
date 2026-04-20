@@ -44,7 +44,7 @@
         </li>
 
         <li>
-          <strong>3. Alegeți unealta potrivită.</strong><br />
+          <strong>3. Alegeți tool-ul potrivit.</strong><br />
           <code>grep</code> caută,<br />
           <code>sed</code> modifică text,<br />
           <code>awk</code> lucrează pe coloane,<br />
@@ -84,7 +84,7 @@
 
     <section class="content">
       <div class="card" *ngIf="isActiveTab('overview')">
-        <h2>1. Imaginea de ansamblu</h2>
+        <h2>1. Overview</h2>
         <p>
           În shell scripting, multe probleme se rezolvă prin combinarea unor
           unelte simple. Gândește fiecare comandă ca pe o piesă cu un rol clar:
@@ -92,7 +92,7 @@
 
         <table class="table">
           <tr>
-            <th>Unealtă</th>
+            <th>Tool</th>
             <th>La ce e bună</th>
             <th>Întrebare utilă pentru student</th>
           </tr>
@@ -139,7 +139,7 @@
       </div>
 
       <div class="card" *ngIf="isActiveTab('chmod')">
-        <h2>2. chmod – permisiuni</h2>
+        <h2>3. chmod – permisiuni</h2>
         <p>
           <code>chmod</code> modifică permisiunile unui fișier sau director.
         </p>
@@ -501,7 +501,7 @@ sed -e '5q' -e 'w employee_1.txt' employees.txt</code></pre>
   </p>
 </div>
       <div class="card" *ngIf="isActiveTab('awk')">
-        <h2>5. awk – coloane și procesare</h2>
+        <h2>6. awk – coloane și procesare</h2>
         <p>
           <code>awk</code> lucrează foarte bine când datele au structură pe
           câmpuri.
@@ -540,7 +540,7 @@ awk -F: '&#123;print $1&#125;' /etc/passwd</code></pre>
 
       <div class="card" *ngIf="isActiveTab('basics')">
 
-  <h2>6. Bash basics</h2>
+  <h2>2. Bash basics</h2>
 
   <!-- 🧠 ARCHITECTURE -->
   <h3>Arhitectura Unix</h3>
