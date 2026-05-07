@@ -1059,7 +1059,156 @@ ls /home/student</code></pre>
 
 
 
+<div class="card c-section" *ngIf="isActiveTab('c')">
+  <div class="c-hero">
+    <div>
+      <h2>8. C <span>PROGRAMMING</span></h2>
+      <p>
+        Limbajul C este folosit pentru programare procedurală, lucrul cu memorie,
+        fișiere, funcții și programe rulate din linia de comandă.
+      </p>
+    </div>
 
+    <div class="c-logo">
+      <div class="terminal-dot purple"></div>
+      <code>C</code>
+    </div>
+  </div>
+
+  <div class="c-cheatsheet">
+    <div class="cheat-card">
+      <h3>1. Structura unui program C</h3>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() &#123;
+    printf("Hello, C!\n");
+    return 0;
+&#125;</code></pre>
+
+      <p class="muted">
+        Orice program C are, de obicei, o funcție <code>main()</code>,
+        de unde începe execuția.
+      </p>
+    </div>
+
+    <div class="cheat-card">
+      <h3>2. Variabile și tipuri de date</h3>
+
+      <table class="mini-table">
+        <tr><td><code>int</code></td><td>numere întregi</td></tr>
+        <tr><td><code>char</code></td><td>un caracter</td></tr>
+        <tr><td><code>float</code></td><td>număr real simplu</td></tr>
+        <tr><td><code>double</code></td><td>număr real cu precizie mai mare</td></tr>
+        <tr><td><code>void</code></td><td>fără valoare returnată</td></tr>
+      </table>
+    </div>
+
+    <div class="grep-row">
+      <div class="cheat-card">
+        <h3>3. Input / Output</h3>
+
+        <pre><code>int age;
+
+printf("Enter age: ");
+scanf("%d", &amp;age);
+
+printf("Age = %d\n", age);</code></pre>
+      </div>
+
+      <div class="cheat-card">
+        <h3>4. Format specifiers</h3>
+
+        <table class="mini-table">
+          <tr><td><code>%d</code></td><td>int</td></tr>
+          <tr><td><code>%c</code></td><td>char</td></tr>
+          <tr><td><code>%f</code></td><td>float</td></tr>
+          <tr><td><code>%lf</code></td><td>double</td></tr>
+          <tr><td><code>%s</code></td><td>string</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="grep-row">
+      <div class="cheat-card">
+        <h3>5. Command-line arguments</h3>
+
+        <pre><code>int main(int argc, char *argv[]) &#123;
+    printf("Program name: %s\n", argv[0]);
+
+    if (argc &gt; 1) &#123;
+        printf("First argument: %s\n", argv[1]);
+    &#125;
+
+    return 0;
+&#125;</code></pre>
+      </div>
+
+      <div class="cheat-card">
+        <h3>6. File handling</h3>
+
+        <pre><code>FILE *f = fopen("data.txt", "r");
+
+if (f == NULL) &#123;
+    printf("File could not be opened\n");
+    return 1;
+&#125;
+
+fclose(f);</code></pre>
+      </div>
+    </div>
+
+    <div class="cheat-card">
+      <h3>7. Exemplu: citire fișier linie cu linie</h3>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main(int argc, char *argv[]) &#123;
+    FILE *f;
+    char line[256];
+    int count = 0;
+
+    if (argc != 2) &#123;
+        printf("Usage: %s filename\n", argv[0]);
+        return 1;
+    &#125;
+
+    f = fopen(argv[1], "r");
+
+    if (f == NULL) &#123;
+        printf("Cannot open file\n");
+        return 1;
+    &#125;
+
+    while (fgets(line, sizeof(line), f)) &#123;
+        printf("%s", line);
+        count++;
+    &#125;
+
+    fclose(f);
+
+    printf("\nNumber of lines: %d\n", count);
+    return 0;
+&#125;</code></pre>
+    </div>
+
+    <div class="cheat-card">
+      <h3>8. Practice</h3>
+
+      <ul>
+        <li>Primește numele unui fișier ca argument și afișează conținutul.</li>
+        <li>Numără câte linii are fișierul.</li>
+        <li>Primește un fișier și un string și adaugă string-ul la final.</li>
+        <li>Copiază conținutul dintr-un fișier în altul.</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="warn">
+    Atenție: în C trebuie să verifici mereu dacă fișierul s-a deschis corect.
+    Dacă <code>fopen()</code> returnează <code>NULL</code>, fișierul nu poate fi folosit.
+  </p>
+</div>
 
     <div class="card" *ngIf="isActiveTab('quiz')">
   <h2>Quiz</h2>
