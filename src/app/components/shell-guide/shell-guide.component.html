@@ -1,51 +1,65 @@
 <div class="app-shell" [class.light-mode]="theme === 'light'">
-<header>
-  <div class="wrap header-content">
-    <div>
-      <h1>Operating Systems – Ghid</h1>
-      <div class="subtitle">
-        Un suport clar pentru laborator: concepte esențiale, exemple, comparații
-        rapide și mini-quizuri pentru <code>chmod</code>, <code>grep</code>,
-        <code>sed</code>, <code>awk</code> și noțiunile de bază care le leagă
-        între ele.
-      </div>
-    </div>
 
-   <div class="top-actions">
-  <button type="button" class="theme-toggle" (click)="toggleTheme()">
-    {{ theme === 'dark' ? '☀️' : '🌙' }}
-  </button>
+<section class="intro-hero">
 
-  <div class="user-menu">
-    <button type="button" class="user-button" (click)="toggleUserMenu()">
-      👤
-    </button>
-
-    <div class="user-dropdown" *ngIf="isUserMenuOpen">
-      <button type="button">Settings</button>
-      <button type="button" (click)="logout()">
-          Log out
-        </button>
-    </div>
+  <div class="hero-blobs">
+    <span class="blob blob-green"></span>
+    <span class="blob blob-blue"></span>
+    <span class="blob blob-purple"></span>
+    <span class="blob blob-orange"></span>
   </div>
-</div>
 
-    <div class="toolbar">
+  <div class="intro-content">
+    <h2>Operating Systems Guide</h2>
+
+    <div class="hero-pill">
+      Linux • Shell scripting • C programming
+    </div>
+
+    <p>
+      Un ghid interactiv pentru laborator, cu exemple clare,
+      cheatsheets și quiz-uri pentru studenți.
+    </p>
+
+<button type="button" class="scroll-hint" (click)="scrollToGuide()">
+  Scroll to start
+</button>
+  </div>
+</section>
+
+<main class="wrap" id="guide-content">
+
+    <nav class="floating-menu">
+    <div class="menu-left">
       <button
         *ngFor="let tab of tabs"
         type="button"
-        class="tab"
+        class="menu-tab"
         [class.active]="isActiveTab(tab.id)"
-        (click)="setActiveTab(tab.id)"
+        (click)="setActiveTab(tab.id);"
       >
         {{ tab.label }}
       </button>
     </div>
-  </div>
-</header>
 
+    <div class="menu-right">
+      <button type="button" class="menu-icon" (click)="toggleTheme()">
+        {{ theme === 'dark' ? '☀️' : '🌙' }}
+      </button>
 
-<main class="wrap">
+      <div class="user-menu">
+        <button type="button" class="menu-icon" (click)="toggleUserMenu()">
+          👤
+        </button>
+
+        <div class="user-dropdown" *ngIf="isUserMenuOpen">
+          <button type="button">Settings</button>
+          <button type="button" (click)="logout()">Log out</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
   <div class="grid">
  
 <aside class="sidebar">
@@ -165,7 +179,7 @@
  
 </aside>
     <section class="content">
-      <div class="card" *ngIf="isActiveTab('overview')">
+      <div class="card" (mousemove)="onMouseMove($event)" *ngIf="isActiveTab('overview')">
         <h2>1. Overview</h2>
         <p>
           În shell scripting, multe probleme se rezolvă prin combinarea unor
@@ -176,7 +190,7 @@
           <tr>
             <th>Tool</th>
             <th>Utilitate</th>
-            <th>Întrebare</th>
+            <th>Mod de abordare</th>
           </tr>
           <tr>
             <td><code>chmod</code></td>
@@ -220,7 +234,7 @@
         </div>
       </div>
 
-  <div class="card chmod-section" *ngIf="isActiveTab('chmod')">
+  <div class="card chmod-section" (mousemove)="onMouseMove($event)" *ngIf="isActiveTab('chmod')">
   <div class="chmod-hero">
     <div>
       <h2>4. Linux <span>FILE PERMISSIONS</span></h2>
@@ -341,12 +355,12 @@ chmod 764 backup.sh</code></pre>
   </div>
 
   <p class="warn">
-    Studenții confundă permisiunea de execuție cu dreptul de citire.
+    Userii confundă permisiunea de execuție cu dreptul de citire.
     Un fișier poate fi citibil fără să fie executabil.
   </p>
 </div>
 
- <div class="card grep-section" *ngIf="isActiveTab('grep')">
+ <div class="card grep-section" (mousemove)="onMouseMove($event)" *ngIf="isActiveTab('grep')">
   <div class="grep-hero">
     <div>
       <h2>5. Linux <span>GREP</span> Cheatsheet</h2>
@@ -595,7 +609,7 @@ sed -n 'w employee.bak' employees.txt</code></pre>
   </p>
 </div>
 
-<div class="card awk-section" *ngIf="isActiveTab('awk')">
+<div class="card awk-section" (mousemove)="onMouseMove($event)" *ngIf="isActiveTab('awk')">
   <div class="awk-hero">
     <div>
       <h2>7. Linux <span>AWK</span> Cheatsheet</h2>
@@ -718,17 +732,24 @@ awk '&#123;sum += $2; count++&#125; END &#123;print sum/count&#125;' notes.txt</
   <h2>2. Basics</h2>
 
   <!-- 🧠 ARCHITECTURE -->
-  <h3>Arhitectura Unix</h3>
-  <img 
-    src="https://raw.githubusercontent.com/dianaelena1/os-app-guide/main/src/assets/images/labs/lab1/unix-architecture.png"
-    alt="Unix Architecture" 
-    style="width:100%; border-radius:16px; margin-bottom:20px;">
+<h3>Arhitectura Unix</h3>
 
-  <p class="muted">
-    Într-un sistem Unix/Linux, utilizatorul interacționează cu <strong>shell-ul</strong>,
-    care rulează în <strong>user space</strong>. Shell-ul transmite comenzile către
-    <strong>kernel</strong>, iar kernel-ul comunică direct cu <strong>hardware-ul</strong>.
-  </p>
+<div
+  class="image-preview"
+  (click)="openImage('https://raw.githubusercontent.com/dianaelena1/os-app-guide/main/src/assets/images/labs/lab1/unix-architecture.png')"
+>
+  <img
+    src="https://raw.githubusercontent.com/dianaelena1/os-app-guide/main/src/assets/images/labs/lab1/unix-architecture.png"
+    alt="Unix Architecture"
+  />
+  <div class="image-eye">👁</div>
+</div>
+
+<p class="muted">
+  Într-un sistem Unix/Linux, utilizatorul interacționează cu <strong>shell-ul</strong>,
+  care rulează în <strong>user space</strong>. Shell-ul transmite comenzile către
+  <strong>kernel</strong>, iar kernel-ul comunică direct cu <strong>hardware-ul</strong>.
+</p>
 
   <!-- 🧩 COMMAND STRUCTURE -->
   <h3>Structura unei comenzi</h3>
@@ -806,11 +827,16 @@ ls -a</code></pre>
   <!-- 🔥 DATA STREAMS -->
 <h3>Data Streams</h3>
 
-<div style="text-align: center; margin: 20px 0;">
+<div
+  class="image-preview image-preview-small"
+  (click)="openImage('https://raw.githubusercontent.com/dianaelena1/os-app-guide/main/src/assets/images/labs/lab2/data-streams.png')"
+>
   <img
     src="https://raw.githubusercontent.com/dianaelena1/os-app-guide/main/src/assets/images/labs/lab2/data-streams.png"
     alt="Data Streams Diagram"
-    style="width: 45%; border-radius: 16px;">
+  />
+
+  <div class="image-eye">👁</div>
 </div>
 
 <p class="muted">
@@ -852,11 +878,16 @@ sort < file1 > file2</code></pre>
 
   <!-- PIPE -->
   <h3>Pipes – legătura între comenzi</h3>
-<div style="text-align: center; margin: 20px 0;">
-<img 
-  src="https://raw.githubusercontent.com/dianaelena1/os-app-guide/main/src/assets/images/labs/lab2/pipe-dark.png"
-  alt="Pipe Diagram"
-  style="width:50%; border-radius:16px; margin:20px 0;">
+<div
+  class="image-preview image-preview-small"
+  (click)="openImage('https://raw.githubusercontent.com/dianaelena1/os-app-guide/main/src/assets/images/labs/lab2/pipe-dark.png')"
+>
+  <img
+    src="https://raw.githubusercontent.com/dianaelena1/os-app-guide/main/src/assets/images/labs/lab2/pipe-dark.png"
+    alt="Pipe Diagram"
+  />
+
+  <div class="image-eye">👁</div>
 </div>
 <p>
   Un <strong>pipe</strong> este un mecanism de comunicare între procese (IPC).
@@ -894,7 +925,7 @@ sort < file1 > file2</code></pre>
 </div>
 
 <p class="warn">
-  Greșeală frecventă: studenții folosesc fișiere temporare în loc de pipe-uri.
+  Greșeală frecventă: userii folosesc fișiere temporare în loc de pipe-uri.
   De multe ori, un <code>|</code> rezolvă problema mai elegant.
 </p>
 
@@ -975,7 +1006,7 @@ done</code></pre>
 
 </div>
 
-<div class="card ls-section" *ngIf="isActiveTab('ls')">
+<div class="card ls-section" (mousemove)="onMouseMove($event)"*ngIf="isActiveTab('ls')">
   <div class="ls-hero">
     <div>
       <h2>3. Linux <span>DIRECTORY STRUCTURE</span></h2>
@@ -1041,7 +1072,7 @@ ls file1 file2</code></pre>
     </div>
 
     <div class="cheat-card">
-      <h3>4. Exemple importante</h3>
+      <h3>4. Testează exemplele importante</h3>
       <pre><code>ls
 ls -l
 ls -a
@@ -1065,13 +1096,13 @@ ls /home/student</code></pre>
   </div>
 
   <p class="warn">
-    Mulți studenți folosesc <code>ls</code>, dar nu citesc coloanele din
+    Mulți useri folosesc <code>ls</code>, dar nu citesc coloanele din
     <code>ls -l</code>. Acolo apar informațiile importante despre permisiuni,
     owner, group, dimensiune și data modificării.
   </p>
 </div>
 
-<div class="card c-section" *ngIf="isActiveTab('c')">
+<div class="card c-section" (mousemove)="onMouseMove($event)" *ngIf="isActiveTab('c')">
   <div class="c-hero">
     <div>
       <h2>8. C <span>PROGRAMMING</span></h2>
@@ -1268,7 +1299,7 @@ fclose(f);</code></pre>
   </p>
 </div>
 
-    <div class="card" *ngIf="isActiveTab('quiz')">
+    <div class="card" (mousemove)="onMouseMove($event)"*ngIf="isActiveTab('quiz')">
   <h2>Quiz</h2>
 
   <div class="quizq" *ngFor="let question of quizQuestions">
@@ -1297,4 +1328,61 @@ fclose(f);</code></pre>
     </section>
   </div>
 </main>
+<footer class="app-footer">
+  <div class="footer-content">
+
+    <div class="footer-brand">
+      <h3>OS App Guide</h3>
+      <p>
+        Interactive guide for Operating Systems laboratories.
+      </p>
+    </div>
+
+    <div class="footer-links">
+      <a
+        href="https://github.com/dianaelena1/Operating-Systems/tree/homework/Labs"
+        target="_blank"
+      >
+       • GitHub Linux Labs
+      </a>
+
+
+      <a
+        href="https://github.com/dianaelena1/os-app-guide"
+        target="_blank"
+      >
+        • Angular App Source Code
+      </a>
+    </div>
+
+    <div class="footer-copy">
+      © 2026 Diana Radu • UBB Cluj, msg-systems Romania
+    </div>
+
+  </div>
+</footer>
+
+<button
+  type="button"
+  class="scroll-top-button"
+  (click)="scrollToTop()"
+  aria-label="Scroll to top"
+>
+  <span class="scroll-arrow"></span>
+</button>
+<div class="image-modal" *ngIf="selectedImage" (click)="closeImage()">
+  <button
+    type="button"
+    class="image-modal-close"
+    (click)="closeImage(); $event.stopPropagation()"
+  >
+    ×
+  </button>
+
+  <img
+    [src]="selectedImage"
+    alt="Preview image"
+    (click)="$event.stopPropagation()"
+  />
+</div>
 </div>

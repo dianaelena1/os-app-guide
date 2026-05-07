@@ -4,6 +4,7 @@ import { GUIDE_BADGES, GUIDE_TABS, QUIZ_QUESTIONS } from '../../data/guide.data'
 import { BadgeItem, GuideTab, QuizQuestion } from '../../models/guide.models';
 import { LAB_IMAGES } from '../../data/guide.data';
 import { Router } from '@angular/router';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-shell-guide',
@@ -74,4 +75,50 @@ toggleTheme(): void {
   getImagesForLab(lab: string): string[] {
   return this.labImages.find(l => l.lab === lab)?.images || [];
   }
+
+  onMouseMove(event: MouseEvent) {
+  const target = event.currentTarget as HTMLElement;
+
+  const rect = target.getBoundingClientRect();
+
+  target.style.setProperty(
+    '--x',
+    `${event.clientX - rect.left}px`
+  );
+
+  target.style.setProperty(
+    '--y',
+    `${event.clientY - rect.top}px`
+  );
+}
+
+scrollToTop(): void {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+
+selectedImage: string | null = null;
+
+openImage(imageUrl: string): void {
+  this.selectedImage = imageUrl;
+}
+
+closeImage(): void {
+  this.selectedImage = null;
+}
+
+@HostListener('document:keydown.escape', ['$event'])
+onEscapePressed(event: KeyboardEvent): void {
+  if (this.selectedImage) {
+    this.closeImage();
+  }
+}
+
+scrollToGuide() {
+  document
+    .getElementById('guide-content')
+    ?.scrollIntoView({ behavior: 'smooth' });
+}
 }
