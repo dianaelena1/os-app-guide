@@ -121,4 +121,11 @@ scrollToGuide() {
     .getElementById('guide-content')
     ?.scrollIntoView({ behavior: 'smooth' });
 }
+
+showScrollTop = false;
+
+@HostListener('window:scroll')
+onWindowScroll() {
+  this.showScrollTop = window.scrollY > 300;
+}
 }

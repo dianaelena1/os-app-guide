@@ -28,15 +28,15 @@
 </section>
 
 <main class="wrap" id="guide-content">
-
-    <nav class="floating-menu">
+<div class="guide-menu-wrap">
+  <nav class="floating-menu">
     <div class="menu-left">
       <button
         *ngFor="let tab of tabs"
         type="button"
         class="menu-tab"
         [class.active]="isActiveTab(tab.id)"
-        (click)="setActiveTab(tab.id);"
+        (click)="setActiveTab(tab.id)"
       >
         {{ tab.label }}
       </button>
@@ -59,6 +59,7 @@
       </div>
     </div>
   </nav>
+</div>
 
   <div class="grid">
  
@@ -1363,6 +1364,7 @@ fclose(f);</code></pre>
 </footer>
 
 <button
+  *ngIf="showScrollTop"
   type="button"
   class="scroll-top-button"
   (click)="scrollToTop()"

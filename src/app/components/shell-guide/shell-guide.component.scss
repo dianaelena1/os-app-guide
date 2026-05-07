@@ -2056,3 +2056,40 @@ main {
     transform: translateY(8px);
   }
 }
+
+.guide-menu-wrap {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 24px;
+  overflow-x: auto;
+  padding: 0 8px 8px;
+}
+
+.floating-menu {
+  width: max-content;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+@media (max-width: 700px) {
+  .guide-menu-wrap {
+    margin-top: 0;
+    padding: 0 12px 10px;
+  }
+
+  .floating-menu {
+    margin: 0;
+    width: max-content;
+    min-width: max-content;
+    border-radius: 28px;
+  }
+
+  .menu-left {
+    flex-wrap: nowrap;
+  }
+
+  .menu-tab {
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+}
