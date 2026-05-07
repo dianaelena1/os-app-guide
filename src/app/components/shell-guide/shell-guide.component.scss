@@ -1182,32 +1182,19 @@ pre {
 }
 
 .header-content {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-
-.top-actions {
-  position: static;
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  width: 100%;
-  order: 1;
+  position: relative;
+  padding-top: 0;
 }
 
-  .header-content > div:first-child {
-    order: 2;
-  }
-
-  .toolbar {
-    order: 3;
-  }
-
-  .theme-toggle,
-  .user-button {
-    position: static;
-  }
+.top-actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  z-index: 30;
+}
 
 .theme-toggle,
 .user-button {
@@ -1251,6 +1238,29 @@ pre {
 
 .user-dropdown button:hover {
   background: rgba(56, 189, 248, 0.12);
+}
+
+@media (max-width: 900px) {
+  .header-content {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .top-actions {
+    position: static;
+    justify-content: flex-end;
+    width: 100%;
+    order: 1;
+  }
+
+  .header-content > div:first-child {
+    order: 2;
+  }
+
+  .toolbar {
+    order: 3;
+  }
 }
 
 .app-shell.light-mode .theme-toggle,
