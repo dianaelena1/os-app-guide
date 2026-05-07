@@ -1182,17 +1182,32 @@ pre {
 }
 
 .header-content {
-  position: relative;
-}
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
 
 .top-actions {
-  position: absolute;
-  top: 0;
-  right: 0;
+  position: static;
   display: flex;
+  justify-content: flex-end;
   gap: 10px;
-  align-items: center;
+  width: 100%;
+  order: 1;
 }
+
+  .header-content > div:first-child {
+    order: 2;
+  }
+
+  .toolbar {
+    order: 3;
+  }
+
+  .theme-toggle,
+  .user-button {
+    position: static;
+  }
 
 .theme-toggle,
 .user-button {
@@ -1609,4 +1624,25 @@ pre {
 .c-flow-step code {
   white-space: normal;
   overflow-wrap: anywhere;
+}
+
+@media (max-width: 900px) {
+  .header-content {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .header-actions {
+    position: static;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .theme-toggle,
+  .user-button {
+    position: static;
+  }
 }

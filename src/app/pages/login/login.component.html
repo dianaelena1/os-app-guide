@@ -1,11 +1,13 @@
 <div class="login-card">
   <h1>Log in</h1>
+
   <p>Autentifică-te pentru a intra în ghid.</p>
 
   <input type="email" [(ngModel)]="email" placeholder="Email" />
+
   <input type="password" [(ngModel)]="password" placeholder="Parola" />
 
   <button type="button" (click)="login()">Log in</button>
 
-  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+  <p *ngIf="errorMessage">{{ errorMessage }}</p>
 </div>
