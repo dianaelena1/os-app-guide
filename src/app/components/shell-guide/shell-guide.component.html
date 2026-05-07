@@ -1,12 +1,19 @@
+<div class="app-shell" [class.light-mode]="theme === 'light'">
 <header>
-  <div class="wrap">
-    <h1>Operating Systems – Ghid</h1>
-    <div class="subtitle">
-      Un suport clar pentru laborator: concepte esențiale, exemple, comparații
-      rapide și mini-quizuri pentru <code>chmod</code>, <code>grep</code>,
-      <code>sed</code>, <code>awk</code> și noțiunile de bază care le leagă
-      între ele.
+  <div class="wrap header-content">
+    <div>
+      <h1>Operating Systems – Ghid</h1>
+      <div class="subtitle">
+        Un suport clar pentru laborator: concepte esențiale, exemple, comparații
+        rapide și mini-quizuri pentru <code>chmod</code>, <code>grep</code>,
+        <code>sed</code>, <code>awk</code> și noțiunile de bază care le leagă
+        între ele.
+      </div>
     </div>
+
+    <button type="button" class="theme-toggle" (click)="toggleTheme()">
+      {{ theme === 'dark' ? '☀️' : '🌙' }}
+    </button>
 
     <div class="toolbar">
       <button
@@ -22,66 +29,126 @@
   </div>
 </header>
 
+
 <main class="wrap">
   <div class="grid">
-    <aside class="sidebar">
-      <h3>Ghid rapid pentru studenti</h3>
-      <p class="muted">
-        Scopul acestui ghid este să vă ajute să înțelegeți mai ușor cum gândiți
-        comenzile în shell scripting, nu doar să le memorați.
-      </p>
+ 
+<aside class="sidebar">
 
-      <ul>
-        <li>
-          <strong>1. Începeți de la problemă.</strong><br />
-          Întrebați-vă mai întâi: <em>ce vreau să obțin?</em>
-        </li>
+  <ng-container *ngIf="isActiveTab('c')">
+  <h3>C – idei importante</h3>
+  <ul>
+    <li><code>C</code> este un limbaj procedural, folosit mult pe Unix/Linux.</li>
+    <li>Programul pornește de obicei din funcția <code>main()</code>.</li>
+    <li>Variabilele au tip fix: <code>int</code>, <code>char</code>, <code>float</code>, <code>double</code>.</li>
+    <li><code>printf()</code> afișează date, iar <code>scanf()</code> citește date.</li>
+    <li>Fișierele se lucrează cu <code>FILE *</code>, <code>fopen()</code>, <code>fgets()</code>, <code>fprintf()</code>, <code>fclose()</code>.</li>
+    <li>Argumentele din linia de comandă se citesc cu <code>argc</code> și <code>argv</code>.</li>
+  </ul>
+</ng-container>
+  <ng-container *ngIf="isActiveTab('overview')">
+    <h3>Ghid rapid pentru studenti</h3>
+    <p class="muted">
+      Scopul acestui ghid este să vă ajute să înțelegeți mai ușor cum gândiți comenzile în shell scripting.
+    </p>
 
-        <li>
-          <strong>2. Gândiți input-ul și output-ul.</strong><br />
-          Ce primește comanda? Un fișier, un text, o listă de linii?<br />
-          Ce produce? Linii afișate, un număr, un text modificat?
-        </li>
+    <ul>
+      <li><strong>1. Începeți de la problemă.</strong><br />Ce vreau să obțin?</li>
+      <li><strong>2. Gândiți input-ul și output-ul.</strong><br />Ce primește comanda? Ce produce?</li>
+      <li><strong>3. Alegeți tool-ul potrivit.</strong><br /><code>grep</code>, <code>sed</code>, <code>awk</code>, <code>chmod</code>.</li>
+      <li><strong>4. Mergeți de la simplu la combinat.</strong><br />Comandă simplă → opțiuni → pipe.</li>
+      <li><strong>5. Testați cu exemple mici.</strong><br />Mai întâi pe 3–4 linii.</li>
+    </ul>
 
-        <li>
-          <strong>3. Alegeți tool-ul potrivit.</strong><br />
-          <code>grep</code> caută,<br />
-          <code>sed</code> modifică text,<br />
-          <code>awk</code> lucrează pe coloane,<br />
-          <code>chmod</code> schimbă permisiuni.
-        </li>
+     <h3>Întrebări utile</h3>
+  <div *ngFor="let badge of badges" class="badge">
+    {{ badge.label }}
+  </div>
+  </ng-container>
 
-        <li>
-          <strong>4. Mergeți de la simplu la combinat.</strong><br />
-          Întâi scrieți comanda de bază, apoi adăugați opțiuni, pipe sau
-          redirectare.
-        </li>
+  <ng-container *ngIf="isActiveTab('basics')">
+    <h3>Basics – ce trebuie reținut</h3>
+    <ul>
+      <li><strong>Linux pornește de la root:</strong> <code>/</code></li>
+      <li><strong>Shell-ul</strong> primește comenzi de la utilizator.</li>
+      <li><strong>Kernel-ul</strong> comunică direct cu hardware-ul.</li>
+      <li><strong>stdin</strong> = input, <strong>stdout</strong> = output, <strong>stderr</strong> = erori.</li>
+      <li><strong>Pipe:</strong> output-ul unei comenzi devine input pentru alta.</li>
+    </ul>
+  </ng-container>
 
-        <li>
-          <strong>5. Testați cu exemple mici.</strong><br />
-          Este mai ușor să înțelegeți o comandă pe 3–4 linii simple decât pe un
-          fișier mare.
-        </li>
+  <ng-container *ngIf="isActiveTab('ls')">
+    <h3>ls – idei importante</h3>
+    <ul>
+      <li><code>ls</code> afișează conținutul unui director.</li>
+      <li><code>ls -l</code> afișează detalii.</li>
+      <li><code>ls -a</code> afișează și fișierele ascunse.</li>
+      <li><code>ls -lh</code> afișează dimensiuni ușor de citit.</li>
+      <li>În Linux, structura directoarelor pornește de la <code>/</code>.</li>
+    </ul>
+  </ng-container>
 
-        <li>
-          <strong>6. Nu memorați mecanic.</strong><br />
-          Încercați să înțelegeți <em>de ce</em> funcționează o comandă, nu doar
-          <em>cum se scrie</em>.
-        </li>
-      </ul>
+  <ng-container *ngIf="isActiveTab('chmod')">
+    <h3>chmod – idei importante</h3>
+    <ul>
+      <li><code>chmod</code> schimbă permisiunile.</li>
+      <li><code>r</code> = read = 4</li>
+      <li><code>w</code> = write = 2</li>
+      <li><code>x</code> = execute = 1</li>
+      <li><code>755</code> înseamnă owner: <code>rwx</code>, group: <code>r-x</code>, others: <code>r-x</code>.</li>
+      <li><code>644</code> este comun pentru fișiere text.</li>
+    </ul>
+  </ng-container>
 
-      <h3>Întrebări utile când exersați</h3>
-      <div *ngFor="let badge of badges" class="badge">
-        {{ badge.label }}
-      </div>
+  <ng-container *ngIf="isActiveTab('grep')">
+    <h3>grep – idei importante</h3>
+    <ul>
+      <li><code>grep</code> caută linii care conțin un pattern.</li>
+      <li><code>-i</code> ignoră litere mari/mici.</li>
+      <li><code>-r</code> caută recursiv în directoare.</li>
+      <li><code>-n</code> afișează numărul liniei.</li>
+      <li><code>-v</code> inversează căutarea.</li>
+      <li><code>-E</code> permite regex extins.</li>
+    </ul>
+  </ng-container>
 
-      <p class="footer">
-        Ideea principală: în shell scripting, multe exerciții se rezolvă prin
-        combinarea unor pași mici și clari. Nu încercați să învățați tot dintr-o
-        dată. Înțelegeți rolul fiecărei comenzi și apoi combinați-le.
-      </p>
-    </aside>
+  <ng-container *ngIf="isActiveTab('sed')">
+    <h3>sed – idei importante</h3>
+    <ul>
+      <li><code>sed</code> editează text în flux.</li>
+      <li><code>-n</code> oprește afișarea automată.</li>
+      <li><code>p</code> afișează linia.</li>
+      <li><code>d</code> șterge linia.</li>
+      <li><code>s/vechi/nou/</code> face substituție.</li>
+      <li><code>-i</code> modifică fișierul direct — atenție!</li>
+    </ul>
+  </ng-container>
 
+  <ng-container *ngIf="isActiveTab('awk')">
+    <h3>awk – idei importante</h3>
+    <ul>
+      <li><code>awk</code> lucrează foarte bine pe coloane.</li>
+      <li><code>$1</code> = prima coloană.</li>
+      <li><code>$2</code> = a doua coloană.</li>
+      <li><code>NF</code> = numărul de câmpuri.</li>
+      <li><code>NR</code> = numărul liniei.</li>
+      <li><code>-F</code> setează separatorul.</li>
+    </ul>
+  </ng-container>
+
+  <ng-container *ngIf="isActiveTab('quiz')">
+    <h3>Quiz – cum să răspunzi</h3>
+    <ul>
+      <li>Citește comanda de la stânga la dreapta.</li>
+      <li>Identifică întâi comanda principală.</li>
+      <li>Verifică opțiunile: <code>-l</code>, <code>-a</code>, <code>-n</code>, <code>-i</code>.</li>
+      <li>Gândește input-ul și output-ul.</li>
+      <li>Nu ghici: explică de ce răspunsul e corect.</li>
+    </ul>
+  </ng-container>
+
+ 
+</aside>
     <section class="content">
       <div class="card" *ngIf="isActiveTab('overview')">
         <h2>1. Overview</h2>
@@ -138,413 +205,499 @@
         </div>
       </div>
 
-      <div class="card" *ngIf="isActiveTab('chmod')">
-        <h2>3. chmod – permisiuni</h2>
-        <p>
-          <code>chmod</code> modifică permisiunile unui fișier sau director.
-        </p>
+  <div class="card chmod-section" *ngIf="isActiveTab('chmod')">
+  <div class="chmod-hero">
+    <div>
+      <h2>4. Linux <span>FILE PERMISSIONS</span></h2>
+      <p>
+        <code>chmod</code> modifică permisiunile unui fișier sau director:
+        cine poate citi, scrie sau executa.
+      </p>
+    </div>
 
-        <div style="text-align: center; margin: 24px 0;">
-        <img
-          src="https://raw.githubusercontent.com/dianaelena1/os-app-guide/main/src/assets/images/labs/lab3/chmod.png"
-          alt="chmod diagram"
-          style="width: 95%; border-radius: 16px;">
-      </div>
+    <div class="chmod-logo">
+      <div class="terminal-dot"></div>
+      <code>chmod</code>
+    </div>
+  </div>
 
-        <div class="example">
-          <div class="mini">
-            <h3>Simbolic</h3>
-            <pre><code>chmod u+x script.sh
-chmod g-w file.txt
-chmod o+r notes.txt</code></pre>
-            <ul>
-              <li><code>u</code> = user</li>
-              <li><code>g</code> = group</li>
-              <li><code>o</code> = others</li>
-              <li><code>+</code> adaugă, <code>-</code> elimină</li>
-            </ul>
-          </div>
+  <div class="permission-visual cheat-card">
+    <h3>1. Cum citim permisiunile</h3>
 
-          <div class="mini">
-            <h3>Numeric</h3>
-            <pre><code>chmod 755 script.sh
-chmod 644 report.txt</code></pre>
-            <ul>
-              <li><code>r=4</code>, <code>w=2</code>, <code>x=1</code></li>
-              <li><code>7 = rwx</code></li>
-              <li><code>6 = rw-</code></li>
-              <li><code>5 = r-x</code></li>
-            </ul>
-          </div>
+    <div class="permission-string">
+      <span class="filetype">-</span>
+      <span class="owner">rwx</span>
+      <span class="group">rw-</span>
+      <span class="other">r--</span>
+    </div>
+
+    <div class="permission-labels">
+      <div><span class="filetype">-</span> tip fișier</div>
+      <div><span class="owner">rwx</span> user / owner</div>
+      <div><span class="group">rw-</span> group</div>
+      <div><span class="other">r--</span> others</div>
+    </div>
+  </div>
+
+  <div class="chmod-cheatsheet">
+    <div class="cheat-card">
+      <h3>2. Valori numerice</h3>
+
+      <div class="permission-boxes">
+        <div class="perm-box owner-box">
+          <h4>Owner</h4>
+          <strong>7</strong>
+          <p><code>rwx</code></p>
+          <small>4 + 2 + 1</small>
         </div>
 
-        <h3>Exemple explicabile rapid</h3>
-        <pre><code>chmod +x script.sh     # face scriptul executabil
-chmod 755 script.sh    # owner: rwx, group: r-x, others: r-x
-chmod 644 file.txt     # owner: rw-, group: r--, others: r--</code></pre>
+        <div class="perm-box group-box">
+          <h4>Group</h4>
+          <strong>6</strong>
+          <p><code>rw-</code></p>
+          <small>4 + 2 + 0</small>
+        </div>
 
-        <h3>Observatie!</h3>
-        <p class="warn">
-          Studenții confundă permisiunea de execuție cu dreptul de citire. Un
-          fișier poate fi citibil fără să fie executabil.
-        </p>
+        <div class="perm-box other-box">
+          <h4>Other</h4>
+          <strong>4</strong>
+          <p><code>r--</code></p>
+          <small>4 + 0 + 0</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="cheat-card">
+      <h3>3. Ce înseamnă r, w, x?</h3>
+      <table class="mini-table">
+        <tr><td><code>r</code></td><td>read</td><td><strong>4</strong></td></tr>
+        <tr><td><code>w</code></td><td>write</td><td><strong>2</strong></td></tr>
+        <tr><td><code>x</code></td><td>execute</td><td><strong>1</strong></td></tr>
+        <tr><td><code>-</code></td><td>fără permisiune</td><td><strong>0</strong></td></tr>
+      </table>
+    </div>
+
+    <div class="grep-row">
+      <div class="cheat-card">
+        <h3>4. Mod simbolic</h3>
+        <pre><code>chmod u+x script.sh
+chmod g-w file.txt
+chmod o+r notes.txt</code></pre>
+
+        <table class="mini-table">
+          <tr><td><code>u</code></td><td>user / owner</td></tr>
+          <tr><td><code>g</code></td><td>group</td></tr>
+          <tr><td><code>o</code></td><td>others</td></tr>
+          <tr><td><code>+</code></td><td>adaugă permisiune</td></tr>
+          <tr><td><code>-</code></td><td>elimină permisiune</td></tr>
+        </table>
       </div>
 
-     <div class="card" *ngIf="isActiveTab('grep')">
-  <h2>4. grep – căutare în text</h2>
-  <p>
-    <code>grep</code> este o comandă Unix folosită pentru a căuta un pattern de text
-    într-un fișier sau într-un flux de date.
-  </p>
+      <div class="cheat-card">
+        <h3>5. Mod numeric</h3>
+        <pre><code>chmod 755 script.sh
+chmod 644 report.txt
+chmod 764 backup.sh</code></pre>
 
-  <div class="example">
-    <div class="mini">
-      <h3>Sintaxă</h3>
-      <pre><code>grep [opțiuni] pattern [fișier]</code></pre>
-      <p class="muted">
-        Pattern-ul poate fi un cuvânt simplu sau o expresie regulată.
+        <p class="muted">
+          Fiecare cifră reprezintă suma permisiunilor pentru:
+          <code>owner</code>, <code>group</code>, <code>others</code>.
+        </p>
+      </div>
+    </div>
+
+    <div class="cheat-card">
+      <h3>6. Exemple explicabile rapid</h3>
+      <table class="mini-table">
+        <tr>
+          <td><code>chmod +x script.sh</code></td>
+          <td>face scriptul executabil</td>
+        </tr>
+        <tr>
+          <td><code>chmod 755 script.sh</code></td>
+          <td>owner: rwx, group: r-x, others: r-x</td>
+        </tr>
+        <tr>
+          <td><code>chmod 644 file.txt</code></td>
+          <td>owner: rw-, group: r--, others: r--</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <p class="warn">
+    Studenții confundă permisiunea de execuție cu dreptul de citire.
+    Un fișier poate fi citibil fără să fie executabil.
+  </p>
+</div>
+
+ <div class="card grep-section" *ngIf="isActiveTab('grep')">
+  <div class="grep-hero">
+    <div>
+      <h2>5. Linux <span>GREP</span> Cheatsheet</h2>
+      <p>
+        <code>grep</code> este o comandă Unix folosită pentru a căuta un pattern de text
+        într-un fișier sau într-un flux de date.
       </p>
     </div>
 
-    <div class="mini">
-      <h3>Exemple de bază</h3>
-      <pre><code>grep "sequence" file_1.txt
+    <div class="grep-logo">
+      <div class="terminal-dot"></div>
+      <code>grep</code>
+    </div>
+  </div>
+
+  <div class="cheat-card grep-meaning">
+    <h3>grep = g/re/p</h3>
+
+    <div class="meaning-line">
+      <span>g</span>
+      <small>global</small>
+      <span>/re/</span>
+      <small>regular expression</small>
+      <span>p</span>
+      <small>print</small>
+    </div>
+  </div>
+
+  <div class="grep-cheatsheet">
+
+  <div class="cheat-card">
+    <h3>1. Usage</h3>
+    <pre><code>grep [opțiuni] pattern [fișier]
+grep "sequence" file_1.txt
 grep sequence file_1.txt file_2.txt
 echo "This is a test" | grep "is"</code></pre>
-      <p class="muted">
-        <code>grep</code> poate căuta într-un fișier, în mai multe fișiere sau în output-ul altei comenzi.
+
+    <p class="muted">
+      Pattern-ul poate fi un cuvânt simplu sau o expresie regulată.
+      <code>grep</code> poate căuta într-un fișier, în mai multe fișiere sau în output-ul altei comenzi.
+    </p>
+  </div>
+
+  <div class="cheat-card">
+    <h3>2. Opțiuni importante</h3>
+
+    <div class="option-list">
+      <div><code>-i</code><span>ignoră diferența dintre litere mari și mici</span></div>
+      <div><code>-r</code><span>caută recursiv în directoare</span></div>
+      <div><code>-l</code><span>afișează doar numele fișierelor cu match</span></div>
+      <div><code>-c</code><span>afișează numărul de potriviri</span></div>
+      <div><code>-w</code><span>potrivește doar cuvântul întreg</span></div>
+      <div><code>-n</code><span>afișează și numărul liniei</span></div>
+      <div><code>-v</code><span>afișează liniile care NU conțin patternul</span></div>
+      <div><code>-E</code><span>folosește expresii regulate extinse</span></div>
+      <div><code>-A n</code><span>afișează n linii după match</span></div>
+      <div><code>-B n</code><span>afișează n linii înainte de match</span></div>
+      <div><code>-C n</code><span>afișează n linii înainte și după match</span></div>
+    </div>
+  </div>
+
+  <div class="grep-row">
+    <div class="cheat-card">
+      <h3>3. Wildcard-uri</h3>
+      <table class="mini-table">
+        <tr><td><code>.</code></td><td>orice caracter</td></tr>
+        <tr><td><code>?</code></td><td>zero sau un caracter</td></tr>
+        <tr><td><code>*</code></td><td>zero sau mai multe caractere</td></tr>
+        <tr><td><code>+</code></td><td>unul sau mai multe caractere</td></tr>
+      </table>
+    </div>
+
+    <div class="cheat-card">
+      <h3>4. Poziții</h3>
+      <table class="mini-table">
+        <tr><td><code>^</code></td><td>început de linie</td></tr>
+        <tr><td><code>$</code></td><td>sfârșit de linie</td></tr>
+        <tr><td><code>^$</code></td><td>linie goală</td></tr>
+        <tr><td><code>\b</code></td><td>limită de cuvânt</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="grep-row">
+    <div class="cheat-card">
+      <h3>5. Clase de caractere</h3>
+      <table class="mini-table">
+        <tr><td><code>[A-Z]</code></td><td>litere mari</td></tr>
+        <tr><td><code>[a-z]</code></td><td>litere mici</td></tr>
+        <tr><td><code>[0-9]</code></td><td>cifre</td></tr>
+        <tr><td><code>[A-Za-z0-9]</code></td><td>litere sau cifre</td></tr>
+        <tr><td><code>[^abc]</code></td><td>orice caracter în afară de a, b, c</td></tr>
+      </table>
+    </div>
+
+    <div class="cheat-card">
+      <h3>6. POSIX</h3>
+      <table class="mini-table">
+        <tr><td><code>[:alpha:]</code></td><td>litere</td></tr>
+        <tr><td><code>[:digit:]</code></td><td>cifre</td></tr>
+        <tr><td><code>[:alnum:]</code></td><td>litere sau cifre</td></tr>
+        <tr><td><code>[:lower:]</code></td><td>litere mici</td></tr>
+        <tr><td><code>[:upper:]</code></td><td>litere mari</td></tr>
+        <tr><td><code>[:space:]</code></td><td>spații</td></tr>
+      </table>
+    </div>
+  </div>
+
+  
+</div>
+</div>
+
+ <div class="card sed-section" *ngIf="isActiveTab('sed')">
+  <div class="sed-hero">
+    <div>
+      <h2>6. Linux <span>SED</span> Command Cheatsheet</h2>
+      <p>
+        <code>sed</code> vine de la <strong>stream editor</strong> și este folosit
+        pentru a transforma, filtra sau edita text direct din linia de comandă.
       </p>
     </div>
-  </div>
 
-  <h3>Opțiuni foarte importante</h3>
-  <div class="flash">
-    <div class="flashcard"><strong>-i</strong><br />ignoră diferența dintre litere mari și mici</div>
-    <div class="flashcard"><strong>-r</strong><br />caută recursiv în directoare</div>
-    <div class="flashcard"><strong>-l</strong><br />afișează doar numele fișierelor care au match</div>
-    <div class="flashcard"><strong>-c</strong><br />afișează numărul de potriviri</div>
-    <div class="flashcard"><strong>-w</strong><br />potrivește doar cuvântul întreg</div>
-    <div class="flashcard"><strong>-n</strong><br />afișează și numărul liniei</div>
-    <div class="flashcard"><strong>-v</strong><br />afișează liniile care NU conțin patternul</div>
-    <div class="flashcard"><strong>-E</strong><br />folosește expresii regulate extinse</div>
-    <div class="flashcard"><strong>-A n</strong><br />afișează n linii după match</div>
-    <div class="flashcard"><strong>-B n</strong><br />afișează n linii înainte de match</div>
-    <div class="flashcard"><strong>-C n</strong><br />afișează n linii înainte și după match</div>
-  </div>
-
-  <h3>Exemple utile</h3>
-  <pre><code>grep -i the file_1.txt file_2.txt
-grep -c the file_1.txt file_2.txt
-grep -rl 1 ~/lab_5
-grep -w 1 file_1.txt file_2.txt
-grep -n error log.txt
-grep -v error log.txt
-grep -E "(dog)+" dog_and_cat.txt</code></pre>
-
-  <h3>Lucrul cu directoare</h3>
-  <pre><code>grep 1 -r ~/lab_5
-grep 1 -rl ~/lab_5</code></pre>
-  <p>
-    Cu <code>-r</code> cauți în directoare. Cu <code>-l</code> vezi doar fișierele care conțin cel puțin un match.
-  </p>
-
-  <h3>Case sensitive vs. case insensitive</h3>
-  <pre><code>grep the file_1.txt file_2.txt
-grep The file_1.txt file_2.txt
-grep -i the file_1.txt file_2.txt</code></pre>
-  <p>
-    În Unix, căutarea este case sensitive. Opțiunea <code>-i</code> ignoră diferența dintre litere mari și mici.
-  </p>
-
-  <h3>Regex esențiale în grep</h3>
-  <table class="table">
-    <tr>
-      <th>Pattern</th>
-      <th>Semnificație</th>
-      <th>Exemplu</th>
-    </tr>
-    <tr>
-      <td><code>.</code></td>
-      <td>orice caracter</td>
-      <td><code>grep "test."</code></td>
-    </tr>
-    <tr>
-      <td><code>\.</code></td>
-      <td>punct literal</td>
-      <td><code>grep "test\."</code></td>
-    </tr>
-    <tr>
-      <td><code>[abcd]</code></td>
-      <td>un caracter din mulțime</td>
-      <td><code>grep "[abcd]" file.txt</code></td>
-    </tr>
-    <tr>
-      <td><code>[^abcd]</code></td>
-      <td>orice caracter, mai puțin cele din mulțime</td>
-      <td><code>grep "[^abcd]" file.txt</code></td>
-    </tr>
-    <tr>
-      <td><code>[0-9]</code></td>
-      <td>orice cifră între 0 și 9</td>
-      <td><code>grep "[0-9]" employees.txt</code></td>
-    </tr>
-    <tr>
-      <td><code>^text</code></td>
-      <td>linia începe cu text</td>
-      <td><code>grep "^Victor" employees.txt</code></td>
-    </tr>
-    <tr>
-      <td><code>text$</code></td>
-      <td>linia se termină cu text</td>
-      <td><code>grep "9$" employees.txt</code></td>
-    </tr>
-    <tr>
-      <td><code>\b</code></td>
-      <td>limită de cuvânt</td>
-      <td><code>grep -i "\blo" file.txt</code></td>
-    </tr>
-  </table>
-
-<h3>Operatori de repetare</h3>
-<pre><code>grep "dog\?" dog_and_cat.txt
-grep "dog\+" dog_and_cat.txt
-grep "dog\&#123;2\&#125;" dog_and_cat.txt
-grep -E "(dog)+" dog_and_cat.txt
-grep -E "(dog)&#123;2,3&#125;" dog_and_cat.txt</code></pre>
-
-<div class="example">
-  <div class="mini">
-    <h3>Basic regex</h3>
-    <p class="muted">
-      Fără <code>-E</code>, unele caractere speciale trebuie escapate:
-    </p>
-    <pre><code>\( \)
-\+
-\?
-\&#123;m,n\&#125;</code></pre>
-  </div>
-
-  <div class="mini">
-    <h3>Extended regex</h3>
-    <p class="muted">Cu <code>-E</code>, sintaxa e mai simplă:</p>
-    <pre><code>( )
-+
-?
-&#123;m,n&#125;</code></pre>
-  </div>
-</div>
-
-<h3>Context în jurul unui match</h3>
-<pre><code>grep -E -B 2 "snoop" dog_and_cat_lines.txt
-grep -E -A 2 "snoop" dog_and_cat_lines.txt
-grep -E -C 2 "snoop" dog_and_cat_lines.txt</code></pre>
-
-  <h3>Context în jurul unui match</h3>
-  <pre><code>grep -E -B 2 "snoop" dog_and_cat_lines.txt
-grep -E -A 2 "snoop" dog_and_cat_lines.txt
-grep -E -C 2 "snoop" dog_and_cat_lines.txt</code></pre>
-
-  <h3>Greșeli frecvente</h3>
-  <p class="warn">
-    Studenții confundă des căutarea într-un fișier cu căutarea într-un director și uită când trebuie folosit
-    <code>-r</code>. De asemenea, <code>-i</code> și <code>-w</code> sunt foarte utile, dar deseori uitate.
-  </p>
-</div>
-
-      <div class="card" *ngIf="isActiveTab('sed')">
-  <h2>5. sed – editare de text în flux</h2>
-  <p>
-    <code>sed</code> vine de la <strong>stream editor</strong> și este folosit pentru a transforma,
-    filtra sau edita text direct din linia de comandă.
-  </p>
-
-  <div class="example">
-    <div class="mini">
-      <h3>Sintaxă</h3>
-      <pre><code>sed [-n] [-e] 'command' [input-file]</code></pre>
-      <ul>
-        <li><code>-n</code> = suprimă afișarea automată</li>
-        <li><code>-e</code> = permite mai multe expresii</li>
-        <li><code>-f</code> = citește scriptul dintr-un fișier</li>
-        <li><code>-i</code> = modifică fișierul direct</li>
-      </ul>
+    <div class="sed-logo">
+      <div class="terminal-dot orange"></div>
+      <code>sed</code>
     </div>
+  </div>
 
-    <div class="mini">
-      <h3>Idee importantă</h3>
+  <div class="cheat-card sed-meaning">
+    <h3>sed = s/ed</h3>
+
+    <div class="meaning-line">
+      <span>s</span>
+      <small>stream</small>
+      <span>/ed/</span>
+      <small>editor</small>
+    </div>
+  </div>
+
+  <div class="sed-cheatsheet">
+    <div class="cheat-card">
+      <h3>1. Sintaxă</h3>
+      <pre><code>sed [-n] [-e] 'command' [input-file]
+sed 'p' employees.txt
+sed -n 'p' employees.txt</code></pre>
+
       <p class="muted">
         Fără <code>-n</code>, <code>sed</code> afișează automat liniile procesate.
         De aceea, uneori pare că o linie este afișată de două ori.
       </p>
-      <pre><code>sed 'p' employees.txt
-sed -n 'p' employees.txt</code></pre>
     </div>
-  </div>
 
-  <h3>Selectarea liniilor</h3>
-  <pre><code>sed -n '2p' employees.txt
+    <div class="cheat-card">
+      <h3>2. Opțiuni importante</h3>
+
+      <div class="option-list sed-options">
+        <div><code>-n</code><span>suprimă afișarea automată</span></div>
+        <div><code>-e</code><span>permite mai multe expresii sed</span></div>
+        <div><code>-f</code><span>citește scriptul sed dintr-un fișier</span></div>
+        <div><code>-i</code><span>modifică fișierul direct</span></div>
+        <div><code>-E</code><span>folosește expresii regulate extinse</span></div>
+      </div>
+    </div>
+
+    <div class="grep-row">
+      <div class="cheat-card">
+        <h3>3. Comenzi sed</h3>
+        <table class="mini-table">
+          <tr><td><code>p</code></td><td>afișează linia</td></tr>
+          <tr><td><code>d</code></td><td>șterge linia</td></tr>
+          <tr><td><code>s</code></td><td>substituie text</td></tr>
+          <tr><td><code>a</code></td><td>adaugă text după linie</td></tr>
+          <tr><td><code>i</code></td><td>inserează text înainte de linie</td></tr>
+          <tr><td><code>c</code></td><td>înlocuiește linia completă</td></tr>
+          <tr><td><code>q</code></td><td>oprește procesarea</td></tr>
+          <tr><td><code>r</code></td><td>citește text din alt fișier</td></tr>
+          <tr><td><code>w</code></td><td>scrie rezultatul într-un fișier</td></tr>
+        </table>
+      </div>
+
+      <div class="cheat-card">
+        <h3>4. Selectarea liniilor</h3>
+        <pre><code>sed -n '2p' employees.txt
 sed -n '2,5p' employees.txt
 sed '$p' employees.txt
 sed -n '/Tudor/p' employees.txt
 sed -n '/Ion/,/Victor/p' employees.txt
 sed -n -e '2p' -e '5p' employees.txt</code></pre>
+      </div>
+    </div>
 
-  <h3>Exemple cu linii și intervale</h3>
-  <table class="table">
-    <tr>
-      <th>Comandă</th>
-      <th>Semnificație</th>
-    </tr>
-    <tr>
-      <td><code>sed -n '2p' file.txt</code></td>
-      <td>afișează linia 2</td>
-    </tr>
-    <tr>
-      <td><code>sed -n '2,5p' file.txt</code></td>
-      <td>afișează liniile 2–5</td>
-    </tr>
-    <tr>
-      <td><code>sed '$p' file.txt</code></td>
-      <td>afișează ultima linie</td>
-    </tr>
-    <tr>
-      <td><code>sed -n '/Tudor/p' file.txt</code></td>
-      <td>afișează liniile care conțin Tudor</td>
-    </tr>
-    <tr>
-      <td><code>sed -n '/Ion/,/Victor/p' file.txt</code></td>
-      <td>afișează intervalul dintre două pattern-uri</td>
-    </tr>
-  </table>
-
-  <h3>Ștergerea liniilor</h3>
-  <pre><code>sed 'd' employees.txt
+    <div class="grep-row">
+      <div class="cheat-card">
+        <h3>5. Ștergerea liniilor</h3>
+        <pre><code>sed 'd' employees.txt
 sed '4d' employees.txt
 sed '/Tudor/d' employees.txt
 sed '2,10d' employees.txt
 sed '/Tudor/,$d' employees.txt
 sed -e '2d' -e '5d' employees.txt</code></pre>
+      </div>
 
-  <h3>Substituția</h3>
-  <pre><code>sed 's/Tudor/Todorutz/' employees.txt
+      <div class="cheat-card">
+        <h3>6. Substituția</h3>
+        <pre><code>sed 's/Tudor/Todorutz/' employees.txt
 sed 's/19/18/g' employees.txt
 sed -n 's/1931/1932/p' employees.txt
 sed -n 's/1931/1932/gp' employees.txt</code></pre>
 
-  <p>
-    <code>s/vechi/nou/</code> înlocuiește prima apariție de pe fiecare linie.
-    Dacă adaugi <code>g</code>, înlocuiești toate aparițiile de pe linia respectivă.
-  </p>
+        <p class="muted">
+          <code>s/vechi/nou/</code> înlocuiește prima apariție de pe fiecare linie.
+          Cu <code>g</code>, se înlocuiesc toate aparițiile de pe linie.
+        </p>
+      </div>
+    </div>
 
-  <h3>Substituție pe intervale</h3>
-  <pre><code>sed -e "2,6p" -e "2,6s/dog/cat/" sed_dog_and_cat.txt
-sed -e "2,6p" -e "2,6s/dog/cat/g" -e "2,6s/hot/cold/" sed_dog_and_cat.txt</code></pre>
-
-  <h3>Grupuri și backreferences</h3>
-  <pre><code>sed -n 's/\(Ion\)el/\1ut/p' employees.txt
+    <div class="grep-row">
+      <div class="cheat-card">
+        <h3>7. Grupuri și backreferences</h3>
+        <pre><code>sed -n 's/\(Ion\)el/\1ut/p' employees.txt
 sed -n 's/\(Vasi\)le\b/\1lica/p' employees.txt
 sed -E -e 'p' -e 's/([0-9])\1$/\1\1.5/' employees.txt</code></pre>
 
-  <p>
-    Cu paranteze poți grupa o secvență și o poți refolosi mai târziu prin <code>\1</code>, <code>\2</code> etc.
-  </p>
+        <p class="muted">
+          Cu paranteze poți grupa o secvență și o poți refolosi prin
+          <code>\1</code>, <code>\2</code> etc.
+        </p>
+      </div>
 
-  <h3>Alte comenzi utile</h3>
-  <pre><code>sed '3a line added' employees.txt
+      <div class="cheat-card">
+        <h3>8. Alte comenzi utile</h3>
+        <pre><code>sed '3a line added' employees.txt
 sed '2c retired employee' employees.txt
 sed '1i \t\t\t PERSONAL DATA' employees.txt
 sed '5q' employees.txt
 sed '3r sed_dog_and_cat.txt' employees.txt
-sed -n 'w employee.bak' employees.txt
-sed -e '5q' -e 'w employee_1.txt' employees.txt</code></pre>
+sed -n 'w employee.bak' employees.txt</code></pre>
+      </div>
+    </div>
+  </div>
 
-  <table class="table">
-    <tr>
-      <th>Comandă</th>
-      <th>Rol</th>
-    </tr>
-    <tr>
-      <td><code>a</code></td>
-      <td>adaugă text după linie</td>
-    </tr>
-    <tr>
-      <td><code>i</code></td>
-      <td>inserează text înainte de linie</td>
-    </tr>
-    <tr>
-      <td><code>c</code></td>
-      <td>înlocuiește linia completă</td>
-    </tr>
-    <tr>
-      <td><code>q</code></td>
-      <td>oprește procesarea</td>
-    </tr>
-    <tr>
-      <td><code>r</code></td>
-      <td>citește și inserează conținut din alt fișier</td>
-    </tr>
-    <tr>
-      <td><code>w</code></td>
-      <td>scrie rezultatul într-un fișier</td>
-    </tr>
-    <tr>
-      <td><code>p</code></td>
-      <td>afișează linia</td>
-    </tr>
-    <tr>
-      <td><code>d</code></td>
-      <td>șterge linia</td>
-    </tr>
-    <tr>
-      <td><code>s</code></td>
-      <td>substituie text</td>
-    </tr>
-  </table>
-
-  <h3>Atenție la -i</h3>
   <p class="warn">
-    Opțiunea <code>-i</code> modifică fișierul direct. Este foarte utilă, dar poate fi periculoasă la început,
-    pentru că schimbă conținutul fără să mai fie nevoie de redirectare sau alt fișier.
+    Atenție: opțiunea <code>-i</code> modifică fișierul direct. Este utilă, dar
+    periculoasă la început, pentru că schimbă conținutul fără să creeze automat
+    o copie separată.
   </p>
 </div>
-      <div class="card" *ngIf="isActiveTab('awk')">
-        <h2>6. awk – coloane și procesare</h2>
-        <p>
-          <code>awk</code> lucrează foarte bine când datele au structură pe
-          câmpuri.
-        </p>
 
-        <pre><code>awk '&#123;print $1&#125;' data.txt
+<div class="card awk-section" *ngIf="isActiveTab('awk')">
+  <div class="awk-hero">
+    <div>
+      <h2>7. Linux <span>AWK</span> Cheatsheet</h2>
+      <p>
+        <code>awk</code> este folosit pentru procesarea textului pe coloane/câmpuri,
+        filtrare, condiții și calcule simple.
+      </p>
+    </div>
+
+    <div class="awk-logo">
+      <div class="terminal-dot blue"></div>
+      <code>awk</code>
+    </div>
+  </div>
+
+  <div class="awk-cheatsheet">
+    <div class="cheat-card">
+      <h3>1. AWK basics</h3>
+      <pre><code>awk '&#123;print $1&#125;' data.txt
 awk '&#123;print $1, $3&#125;' data.txt
 awk '$3 &gt; 100 &#123;print $1, $3&#125;' sales.txt
 awk -F: '&#123;print $1&#125;' /etc/passwd
 awk '&#123;sum += $2&#125; END &#123;print sum&#125;' prices.txt</code></pre>
 
-        <div class="example">
-          <div class="mini">
-            <h3>Ideea de bază</h3>
-            <ul>
-              <li><code>$1</code> = primul câmp</li>
-              <li><code>$2</code> = al doilea câmp</li>
-              <li><code>NF</code> = numărul de câmpuri</li>
-              <li><code>NR</code> = numărul liniei</li>
-            </ul>
-          </div>
+      <p class="muted">
+        AWK citește linie cu linie și împarte fiecare linie în câmpuri.
+      </p>
+    </div>
 
-          <div class="mini">
-            <h3>Cu separator personalizat</h3>
-            <pre><code>awk -F, '&#123;print $1, $4&#125;' file.csv
-awk -F: '&#123;print $1&#125;' /etc/passwd</code></pre>
-          </div>
-        </div>
+    <div class="cheat-card">
+      <h3>2. Variabile built-in</h3>
+      <table class="mini-table">
+        <tr><td><code>$1</code></td><td>primul câmp</td></tr>
+        <tr><td><code>$2</code></td><td>al doilea câmp</td></tr>
+        <tr><td><code>$NF</code></td><td>ultimul câmp</td></tr>
+        <tr><td><code>NF</code></td><td>numărul de câmpuri</td></tr>
+        <tr><td><code>NR</code></td><td>numărul liniei curente</td></tr>
+        <tr><td><code>FS</code></td><td>separatorul de câmpuri</td></tr>
+        <tr><td><code>OFS</code></td><td>separatorul pentru output</td></tr>
+        <tr><td><code>FILENAME</code></td><td>numele fișierului curent</td></tr>
+      </table>
+    </div>
 
-        <h3>Când aleg awk în loc de grep sau sed?</h3>
-        <p>
-          Când te interesează o anumită coloană, un calcul sau o condiție pe
-          câmpuri.
-        </p>
+    <div class="grep-row">
+      <div class="cheat-card">
+        <h3>3. Operatori aritmetici</h3>
+        <table class="mini-table">
+          <tr><td><code>+</code></td><td>adunare</td></tr>
+          <tr><td><code>-</code></td><td>scădere</td></tr>
+          <tr><td><code>*</code></td><td>înmulțire</td></tr>
+          <tr><td><code>/</code></td><td>împărțire</td></tr>
+          <tr><td><code>%</code></td><td>modulo</td></tr>
+          <tr><td><code>++</code></td><td>incrementare</td></tr>
+          <tr><td><code>--</code></td><td>decrementare</td></tr>
+        </table>
       </div>
 
+      <div class="cheat-card">
+        <h3>4. Operatori de comparație</h3>
+        <table class="mini-table">
+          <tr><td><code>==</code></td><td>egal</td></tr>
+          <tr><td><code>!=</code></td><td>diferit</td></tr>
+          <tr><td><code>&gt;</code></td><td>mai mare</td></tr>
+          <tr><td><code>&lt;</code></td><td>mai mic</td></tr>
+          <tr><td><code>&gt;=</code></td><td>mai mare sau egal</td></tr>
+          <tr><td><code>&lt;=</code></td><td>mai mic sau egal</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="grep-row">
+      <div class="cheat-card">
+        <h3>5. Operatori logici</h3>
+        <table class="mini-table">
+          <tr><td><code>&amp;&amp;</code></td><td>AND logic</td></tr>
+          <tr><td><code>||</code></td><td>OR logic</td></tr>
+          <tr><td><code>!</code></td><td>NOT logic</td></tr>
+          <tr><td><code>?:</code></td><td>operator ternar</td></tr>
+        </table>
+      </div>
+
+      <div class="cheat-card">
+        <h3>6. Separator personalizat</h3>
+        <pre><code>awk -F, '&#123;print $1, $4&#125;' file.csv
+awk -F: '&#123;print $1&#125;' /etc/passwd
+awk 'BEGIN &#123;FS=":"&#125; &#123;print $1&#125;' /etc/passwd</code></pre>
+
+        <p class="muted">
+          <code>-F</code> setează separatorul pentru câmpuri.
+        </p>
+      </div>
+    </div>
+
+    <div class="grep-row">
+      <div class="cheat-card">
+        <h3>7. Exemple cu condiții</h3>
+        <pre><code>awk '$3 &gt; 100 &#123;print $1, $3&#125;' sales.txt
+awk '$2 == "Cluj" &#123;print $1&#125;' students.txt
+awk 'NR &gt; 1 &#123;print $0&#125;' table.txt
+awk 'NF &gt; 3 &#123;print $0&#125;' data.txt</code></pre>
+      </div>
+
+      <div class="cheat-card">
+        <h3>8. Exemple cu calcule</h3>
+        <pre><code>awk '&#123;sum += $2&#125; END &#123;print sum&#125;' prices.txt
+awk '&#123;count++&#125; END &#123;print count&#125;' file.txt
+awk '&#123;sum += $2; count++&#125; END &#123;print sum/count&#125;' notes.txt</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <p class="warn">
+    AWK este cel mai util când datele au structură pe coloane. Dacă vrei doar să
+    cauți text, folosește <code>grep</code>. Dacă vrei să înlocuiești text, folosește
+    <code>sed</code>.
+  </p>
+</div>
       <div class="card" *ngIf="isActiveTab('basics')">
 
   <h2>2. Basics</h2>
@@ -807,108 +960,255 @@ done</code></pre>
 
 </div>
 
-      <div class="card" *ngIf="isActiveTab('ls')">
-    <h2>3. ls – listarea fișierelor și directoarelor</h2>
-    <p>
-      <code>ls</code> este comanda folosită pentru a afișa conținutul unui director.
-      Este una dintre cele mai importante comenzi de bază în Linux.
-    </p>
+<div class="card ls-section" *ngIf="isActiveTab('ls')">
+  <div class="ls-hero">
+    <div>
+      <h2>3. Linux <span>DIRECTORY STRUCTURE</span></h2>
+      <p>
+        <code>ls</code> este comanda folosită pentru a afișa conținutul unui director.
+        În Linux, directoarele pornesc de la <code>/</code>, numit și <strong>root</strong>.
+      </p>
+    </div>
 
-    <div style="text-align: center; margin: 24px 0;">
-  <img
-    src="https://raw.githubusercontent.com/dianaelena1/os-app-guide/main/src/assets/images/labs/lab4/linux-tree.png"
-    alt="Linux directory tree"
-    style="width: 80%; border-radius: 16px;">
+    <div class="linux-badge">
+      <div class="penguin">🐧</div>
+      <strong>Linux</strong>
+      <span>directory structure</span>
+    </div>
+  </div>
+
+  <div class="linux-tree-card cheat-card">
+    <h3>1. Structura directoarelor Linux</h3>
+
+    <div class="linux-tree">
+      <div class="root-node">/</div>
+
+      <div class="tree-list">
+        <div class="tree-item"><code>bin</code><span>comenzi și executabile de bază</span></div>
+        <div class="tree-item"><code>boot</code><span>fișiere necesare pentru pornirea sistemului</span></div>
+        <div class="tree-item"><code>dev</code><span>fișiere pentru dispozitive</span></div>
+        <div class="tree-item"><code>etc</code><span>fișiere de configurare</span></div>
+        <div class="tree-item"><code>home</code><span>datele utilizatorilor</span></div>
+        <div class="tree-item"><code>lib</code><span>biblioteci și module</span></div>
+        <div class="tree-item"><code>media</code><span>medii externe montate</span></div>
+        <div class="tree-item"><code>mnt</code><span>punct temporar de montare</span></div>
+        <div class="tree-item"><code>opt</code><span>software opțional</span></div>
+        <div class="tree-item"><code>proc</code><span>procese și informații despre kernel</span></div>
+        <div class="tree-item"><code>root</code><span>home-ul utilizatorului root</span></div>
+        <div class="tree-item"><code>tmp</code><span>fișiere temporare</span></div>
+        <div class="tree-item"><code>usr</code><span>programe și date pentru utilizatori</span></div>
+        <div class="tree-item"><code>var</code><span>date variabile, de exemplu loguri</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ls-cheatsheet">
+    <div class="cheat-card">
+      <h3>2. Sintaxă de bază</h3>
+      <pre><code>ls
+ls folder/
+ls file1 file2</code></pre>
+
+      <p class="muted">
+        Poți lista directorul curent, un alt director sau mai multe fișiere/directoare.
+      </p>
+    </div>
+
+    <div class="cheat-card">
+      <h3>3. Opțiuni utile</h3>
+      <table class="mini-table">
+        <tr><td><code>-l</code></td><td>afișare detaliată</td></tr>
+        <tr><td><code>-a</code></td><td>afișează și fișierele ascunse</td></tr>
+        <tr><td><code>-h</code></td><td>dimensiuni ușor de citit</td></tr>
+        <tr><td><code>-la</code></td><td>detalii + fișiere ascunse</td></tr>
+        <tr><td><code>-R</code></td><td>listare recursivă</td></tr>
+      </table>
+    </div>
+
+    <div class="cheat-card">
+      <h3>4. Exemple importante</h3>
+      <pre><code>ls
+ls -l
+ls -a
+ls -la
+ls -lh
+ls /home/student</code></pre>
+    </div>
+
+    <div class="cheat-card">
+      <h3>5. Cum citim rezultatul lui ls -l</h3>
+      <table class="mini-table">
+        <tr><td><code>-rw-r--r--</code></td><td>permisiunile fișierului</td></tr>
+        <tr><td><code>1</code></td><td>numărul de linkuri</td></tr>
+        <tr><td><code>diana</code></td><td>owner</td></tr>
+        <tr><td><code>studenti</code></td><td>group</td></tr>
+        <tr><td><code>245</code></td><td>dimensiunea fișierului</td></tr>
+        <tr><td><code>Apr 18</code></td><td>data ultimei modificări</td></tr>
+        <tr><td><code>script.sh</code></td><td>numele fișierului</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <p class="warn">
+    Mulți studenți folosesc <code>ls</code>, dar nu citesc coloanele din
+    <code>ls -l</code>. Acolo apar informațiile importante despre permisiuni,
+    owner, group, dimensiune și data modificării.
+  </p>
 </div>
 
-<p class="muted">
-  Sistemul de fișiere Linux este organizat ca un arbore, pornind de la <code>/</code> (root).
-  Fiecare director poate conține alte directoare sau fișiere.
-</p>
 
-    <div class="example">
-      <div class="mini">
-        <h3>Sintaxă de bază</h3>
-        <pre><code>ls
-  ls folder/
-  ls file1 file2</code></pre>
-        <p class="muted">
-          Poți lista directorul curent, un alt director sau mai multe fișiere și directoare.
-        </p>
+
+
+<div class="card c-section" *ngIf="isActiveTab('c')">
+  <div class="c-hero">
+    <div>
+      <h2>8. C <span>PROGRAMMING</span></h2>
+      <p>
+        Limbajul C este folosit pentru programare procedurală, lucrul cu memorie,
+        fișiere, funcții și programe rulate din linia de comandă.
+      </p>
+    </div>
+
+    <div class="c-logo">
+      <div class="terminal-dot purple"></div>
+      <code>C</code>
+    </div>
+  </div>
+
+  <div class="c-cheatsheet">
+    <div class="cheat-card">
+      <h3>1. Structura unui program C</h3>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() &#123;
+    printf("Hello, C!\n");
+    return 0;
+&#125;</code></pre>
+
+      <p class="muted">
+        Orice program C are, de obicei, o funcție <code>main()</code>,
+        de unde începe execuția.
+      </p>
+    </div>
+
+    <div class="cheat-card">
+      <h3>2. Variabile și tipuri de date</h3>
+
+      <table class="mini-table">
+        <tr><td><code>int</code></td><td>numere întregi</td></tr>
+        <tr><td><code>char</code></td><td>un caracter</td></tr>
+        <tr><td><code>float</code></td><td>număr real simplu</td></tr>
+        <tr><td><code>double</code></td><td>număr real cu precizie mai mare</td></tr>
+        <tr><td><code>void</code></td><td>fără valoare returnată</td></tr>
+      </table>
+    </div>
+
+    <div class="grep-row">
+      <div class="cheat-card">
+        <h3>3. Input / Output</h3>
+
+        <pre><code>int age;
+
+printf("Enter age: ");
+scanf("%d", &amp;age);
+
+printf("Age = %d\n", age);</code></pre>
       </div>
 
-      <div class="mini">
-        <h3>Opțiuni utile</h3>
-        <pre><code>ls -l
-  ls -a
-  ls -lh
-  ls -la
-  ls -R</code></pre>
-        <ul>
-          <li><code>-l</code> = format lung</li>
-          <li><code>-a</code> = afișează și fișierele ascunse</li>
-          <li><code>-h</code> = dimensiuni ușor de citit</li>
-          <li><code>-R</code> = listare recursivă</li>
-        </ul>
+      <div class="cheat-card">
+        <h3>4. Format specifiers</h3>
+
+        <table class="mini-table">
+          <tr><td><code>%d</code></td><td>int</td></tr>
+          <tr><td><code>%c</code></td><td>char</td></tr>
+          <tr><td><code>%f</code></td><td>float</td></tr>
+          <tr><td><code>%lf</code></td><td>double</td></tr>
+          <tr><td><code>%s</code></td><td>string</td></tr>
+        </table>
       </div>
     </div>
 
-    <h3>Exemple importante</h3>
-    <pre><code>ls                # afișează conținutul directorului curent
-  ls -l             # afișează detalii despre fișiere
-  ls -a             # afișează și fișierele ascunse
-  ls -la            # combinație foarte folosită
-  ls -lh            # dimensiuni în format ușor de citit
-  ls /home/student  # listează conținutul altui director</code></pre>
+    <div class="grep-row">
+      <div class="cheat-card">
+        <h3>5. Command-line arguments</h3>
 
-    <h3>Cum citești rezultatul lui ls -l</h3>
-    <table class="table">
-      <tr>
-        <th>Exemplu</th>
-        <th>Semnificație</th>
-      </tr>
-      <tr>
-        <td><code>-rw-r--r--</code></td>
-        <td>permisiunile fișierului</td>
-      </tr>
-      <tr>
-        <td><code>1</code></td>
-        <td>numărul de linkuri</td>
-      </tr>
-      <tr>
-        <td><code>diana</code></td>
-        <td>owner</td>
-      </tr>
-      <tr>
-        <td><code>studenti</code></td>
-        <td>group</td>
-      </tr>
-      <tr>
-        <td><code>245</code></td>
-        <td>dimensiunea fișierului</td>
-      </tr>
-      <tr>
-        <td><code>Apr 18</code></td>
-        <td>data ultimei modificări</td>
-      </tr>
-      <tr>
-        <td><code>script.sh</code></td>
-        <td>numele fișierului</td>
-      </tr>
-    </table>
+        <pre><code>int main(int argc, char *argv[]) &#123;
+    printf("Program name: %s\n", argv[0]);
 
-    <h3>Legătura cu chmod</h3>
-    <p>
-      Comanda <code>ls -l</code> este foarte utilă împreună cu <code>chmod</code>,
-      pentru că îți arată permisiunile înainte și după ce le modifici.
-    </p>
+    if (argc &gt; 1) &#123;
+        printf("First argument: %s\n", argv[1]);
+    &#125;
 
-    <h3>Greșeală frecventă</h3>
-    <p class="warn">
-      Mulți studenți folosesc <code>ls</code>, dar nu citesc și nu interpretează coloanele din
-      <code>ls -l</code>. Tocmai acolo se vede informația importantă despre permisiuni.
-    </p>
+    return 0;
+&#125;</code></pre>
+      </div>
+
+      <div class="cheat-card">
+        <h3>6. File handling</h3>
+
+        <pre><code>FILE *f = fopen("data.txt", "r");
+
+if (f == NULL) &#123;
+    printf("File could not be opened\n");
+    return 1;
+&#125;
+
+fclose(f);</code></pre>
+      </div>
+    </div>
+
+    <div class="cheat-card">
+      <h3>7. Exemplu: citire fișier linie cu linie</h3>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main(int argc, char *argv[]) &#123;
+    FILE *f;
+    char line[256];
+    int count = 0;
+
+    if (argc != 2) &#123;
+        printf("Usage: %s filename\n", argv[0]);
+        return 1;
+    &#125;
+
+    f = fopen(argv[1], "r");
+
+    if (f == NULL) &#123;
+        printf("Cannot open file\n");
+        return 1;
+    &#125;
+
+    while (fgets(line, sizeof(line), f)) &#123;
+        printf("%s", line);
+        count++;
+    &#125;
+
+    fclose(f);
+
+    printf("\nNumber of lines: %d\n", count);
+    return 0;
+&#125;</code></pre>
+    </div>
+
+    <div class="cheat-card">
+      <h3>8. Practice</h3>
+
+      <ul>
+        <li>Primește numele unui fișier ca argument și afișează conținutul.</li>
+        <li>Numără câte linii are fișierul.</li>
+        <li>Primește un fișier și un string și adaugă string-ul la final.</li>
+        <li>Copiază conținutul dintr-un fișier în altul.</li>
+      </ul>
+    </div>
   </div>
+
+  <p class="warn">
+    Atenție: în C trebuie să verifici mereu dacă fișierul s-a deschis corect.
+    Dacă <code>fopen()</code> returnează <code>NULL</code>, fișierul nu poate fi folosit.
+  </p>
+</div>
 
     <div class="card" *ngIf="isActiveTab('quiz')">
   <h2>Quiz</h2>
@@ -939,3 +1239,4 @@ done</code></pre>
     </section>
   </div>
 </main>
+</div>
