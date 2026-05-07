@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { GUIDE_BADGES, GUIDE_TABS, QUIZ_QUESTIONS } from '../../data/guide.data';
 import { BadgeItem, GuideTab, QuizQuestion } from '../../models/guide.models';
 import { LAB_IMAGES } from '../../data/guide.data';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shell-guide',
@@ -13,6 +14,18 @@ import { LAB_IMAGES } from '../../data/guide.data';
 })
 export class ShellGuideComponent {
   theme: 'dark' | 'light' = 'dark';
+
+  constructor(private router: Router) {}
+
+  isUserMenuOpen = false;
+
+toggleUserMenu(): void {
+  this.isUserMenuOpen = !this.isUserMenuOpen;
+}
+
+logout(): void {
+  this.router.navigate(['/login']);
+}
 
 toggleTheme(): void {
   this.theme = this.theme === 'dark' ? 'light' : 'dark';

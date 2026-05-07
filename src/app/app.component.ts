@@ -1,18 +1,11 @@
 import { Component } from '@angular/core';
-import { ShellGuideComponent } from './components/shell-guide/shell-guide.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ShellGuideComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  theme: 'dark' | 'light' = 'dark';
-
-toggleTheme(): void {
-  this.theme = this.theme === 'dark' ? 'light' : 'dark';
-}}
-
-
+export class AppComponent {}

@@ -1185,10 +1185,17 @@ pre {
   position: relative;
 }
 
-.theme-toggle {
+.top-actions {
   position: absolute;
   top: 0;
   right: 0;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.theme-toggle,
+.user-button {
   border: 1px solid var(--border);
   background: rgba(2, 6, 23, 0.75);
   color: var(--text);
@@ -1196,6 +1203,55 @@ pre {
   border-radius: 999px;
   cursor: pointer;
   font-weight: 700;
+}
+
+.user-menu {
+  position: relative;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  min-width: 150px;
+  padding: 8px;
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.98);
+  border: 1px solid var(--border);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  z-index: 50;
+}
+
+.user-dropdown button {
+  width: 100%;
+  display: block;
+  text-align: left;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.user-dropdown button:hover {
+  background: rgba(56, 189, 248, 0.12);
+}
+
+.app-shell.light-mode .theme-toggle,
+.app-shell.light-mode .user-button,
+.app-shell.light-mode .user-dropdown {
+  background: #ffffff;
+  color: #0f172a;
+  border-color: rgba(15, 23, 42, 0.18);
+}
+
+.app-shell.light-mode .user-dropdown button {
+  color: #0f172a;
+}
+
+.app-shell.light-mode .user-dropdown button:hover {
+  background: #e0f2fe;
 }
 
 .theme-toggle:hover {
