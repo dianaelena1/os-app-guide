@@ -342,6 +342,13 @@ img {
 }
 
 @media (max-width: 900px) {
+  .c-flow {
+    flex-direction: column;
+  }
+
+  .c-arrow {
+    transform: rotate(90deg);
+  }
   header {
     position: static;
   }
@@ -637,7 +644,17 @@ img {
 }
 
 .chmod-hero h2 span {
-  color: #34d399;
+  color: #d33434;
+}
+
+.chmod-logo .terminal-dot {
+  background: #ef4444;
+  box-shadow: 0 0 18px rgba(239, 68, 68, 0.8);
+}
+
+.app-shell.light-mode .chmod-logo .terminal-dot {
+  background: #dc2626;
+  box-shadow: 0 0 18px rgba(220, 38, 38, 0.65);
 }
 
 .chmod-logo {
@@ -646,7 +663,7 @@ img {
   border-radius: 22px;
   background: rgba(2, 6, 23, 0.9);
   border: 1px solid rgba(52, 211, 153, 0.35);
-  color: #34d399;
+  color: #d3343c;
   text-align: center;
   box-shadow: 0 0 35px rgba(52, 211, 153, 0.12);
 }
@@ -1360,6 +1377,20 @@ pre {
   box-shadow: 0 0 35px rgba(167, 139, 250, 0.12);
 }
 
+.app-shell.light-mode .c-logo {
+  background: #ffffff;
+  border-color: rgba(124, 58, 237, 0.25);
+}
+
+.app-shell.light-mode .c-logo code {
+  color: #7c3aed;
+}
+
+.app-shell.light-mode .terminal-dot.purple {
+  background: #7c3aed;
+  box-shadow: 0 0 18px rgba(124, 58, 237, 0.65);
+}
+
 .terminal-dot.purple {
   background: #a78bfa;
   box-shadow: 0 0 18px #a78bfa;
@@ -1385,4 +1416,141 @@ pre {
   .c-logo {
     width: 100%;
   }
+}
+
+.c-flow,
+.file-flow,
+.type-branches,
+.memory-compare {
+  display: grid;
+  gap: 14px;
+}
+
+.c-flow-step,
+.file-flow div,
+.type-box,
+.memory-compare div {
+  background: rgba(2, 6, 23, 0.55);
+  border: 1px solid rgba(167, 139, 250, 0.22);
+  border-radius: 18px;
+  padding: 16px;
+}
+
+.c-flow-step span {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #a78bfa;
+  color: #020617;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+.c-flow-step strong,
+.type-box strong,
+.memory-compare strong {
+  display: block;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.c-arrow {
+  color: #a78bfa;
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.c-type-tree {
+  text-align: center;
+}
+
+.type-root {
+  display: inline-block;
+  padding: 14px 22px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #a78bfa, #60a5fa);
+  color: #020617;
+  font-weight: 900;
+  margin-bottom: 18px;
+}
+
+.type-branches {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.type-box code {
+  display: inline-block;
+  margin: 5px;
+  color: #a78bfa;
+}
+
+.memory-compare {
+  grid-template-columns: 1fr 1fr;
+}
+
+.memory-compare span {
+  display: inline-block;
+  color: #a78bfa;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.file-flow {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.file-flow code {
+  display: block;
+  color: #a78bfa;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.file-flow span {
+  color: var(--muted);
+}
+
+.app-shell.light-mode .c-flow-step,
+.app-shell.light-mode .file-flow div,
+.app-shell.light-mode .type-box,
+.app-shell.light-mode .memory-compare div {
+  background: #ffffff;
+  border-color: rgba(124, 58, 237, 0.18);
+}
+
+@media (max-width: 1000px) {
+  .c-flow,
+  .file-flow,
+  .type-branches,
+  .memory-compare {
+    grid-template-columns: 1fr;
+  }
+
+  .c-arrow {
+    transform: rotate(90deg);
+    text-align: center;
+  }
+}
+
+.c-flow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  gap: 28px;
+  align-items: stretch;
+}
+
+.c-flow-step {
+  min-width: 0;
+  padding: 16px;
+}
+
+.c-flow-step::after {
+  right: -22px;
+}
+
+.c-flow-step code {
+  white-space: normal;
+  overflow-wrap: anywhere;
 }

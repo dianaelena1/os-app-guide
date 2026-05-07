@@ -36,7 +36,7 @@
 <aside class="sidebar">
 
   <ng-container *ngIf="isActiveTab('c')">
-  <h3>C – idei importante</h3>
+  <h3>C – Să reținem</h3>
   <ul>
     <li><code>C</code> este un limbaj procedural, folosit mult pe Unix/Linux.</li>
     <li>Programul pornește de obicei din funcția <code>main()</code>.</li>
@@ -47,7 +47,7 @@
   </ul>
 </ng-container>
   <ng-container *ngIf="isActiveTab('overview')">
-    <h3>Ghid rapid pentru studenti</h3>
+    <h3>Ghid rapid</h3>
     <p class="muted">
       Scopul acestui ghid este să vă ajute să înțelegeți mai ușor cum gândiți comenzile în shell scripting.
     </p>
@@ -78,7 +78,7 @@
   </ng-container>
 
   <ng-container *ngIf="isActiveTab('ls')">
-    <h3>ls – idei importante</h3>
+    <h3>ls – Să reținem</h3>
     <ul>
       <li><code>ls</code> afișează conținutul unui director.</li>
       <li><code>ls -l</code> afișează detalii.</li>
@@ -89,7 +89,7 @@
   </ng-container>
 
   <ng-container *ngIf="isActiveTab('chmod')">
-    <h3>chmod – idei importante</h3>
+    <h3>chmod – Să reținem</h3>
     <ul>
       <li><code>chmod</code> schimbă permisiunile.</li>
       <li><code>r</code> = read = 4</li>
@@ -101,7 +101,7 @@
   </ng-container>
 
   <ng-container *ngIf="isActiveTab('grep')">
-    <h3>grep – idei importante</h3>
+    <h3>grep – Să reținem</h3>
     <ul>
       <li><code>grep</code> caută linii care conțin un pattern.</li>
       <li><code>-i</code> ignoră litere mari/mici.</li>
@@ -113,7 +113,7 @@
   </ng-container>
 
   <ng-container *ngIf="isActiveTab('sed')">
-    <h3>sed – idei importante</h3>
+    <h3>sed – Să reținem</h3>
     <ul>
       <li><code>sed</code> editează text în flux.</li>
       <li><code>-n</code> oprește afișarea automată.</li>
@@ -125,7 +125,7 @@
   </ng-container>
 
   <ng-container *ngIf="isActiveTab('awk')">
-    <h3>awk – idei importante</h3>
+    <h3>awk – Să reținem</h3>
     <ul>
       <li><code>awk</code> lucrează foarte bine pe coloane.</li>
       <li><code>$1</code> = prima coloană.</li>
@@ -160,8 +160,8 @@
         <table class="table">
           <tr>
             <th>Tool</th>
-            <th>La ce e bună</th>
-            <th>Întrebare utilă pentru student</th>
+            <th>Utilitate</th>
+            <th>Întrebare</th>
           </tr>
           <tr>
             <td><code>chmod</code></td>
@@ -187,7 +187,7 @@
 
         <div class="example">
           <div class="mini">
-            <h3>Fir logic bun</h3>
+            <h3>Steps</h3>
             <ol>
               <li>identific problema</li>
               <li>aleg comanda principală</li>
@@ -1056,16 +1056,13 @@ ls /home/student</code></pre>
   </p>
 </div>
 
-
-
-
 <div class="card c-section" *ngIf="isActiveTab('c')">
   <div class="c-hero">
     <div>
       <h2>8. C <span>PROGRAMMING</span></h2>
       <p>
-        Limbajul C este folosit pentru programare procedurală, lucrul cu memorie,
-        fișiere, funcții și programe rulate din linia de comandă.
+        Limbajul C este procedural, modular și foarte folosit pe Unix/Linux,
+        mai ales pentru programe aproape de sistem.
       </p>
     </div>
 
@@ -1075,9 +1072,39 @@ ls /home/student</code></pre>
     </div>
   </div>
 
-  <div class="c-cheatsheet">
+  <div class="cheat-card c-flow-card">
+    <h3>1. Cum scriem și rulăm un program C</h3>
+
+    <div class="c-flow">
+      <div class="c-flow-step">
+        <span>1</span>
+        <strong>Source file</strong>
+        <code>program.c</code>
+      </div>
+
+      <div class="c-flow-step">
+        <span>2</span>
+        <strong>Compile</strong>
+        <code>gcc program.c</code>
+      </div>
+
+      <div class="c-flow-step">
+        <span>3</span>
+        <strong>Run</strong>
+        <code>./a.out</code>
+      </div>
+
+      <div class="c-flow-step">
+        <span>4</span>
+        <strong>Output</strong>
+        <code>Hello, C!</code>
+      </div>
+    </div>
+  </div>
+
+  <div class="grep-row">
     <div class="cheat-card">
-      <h3>1. Structura unui program C</h3>
+      <h3>2. Structura unui program C</h3>
 
       <pre><code>#include &lt;stdio.h&gt;
 
@@ -1087,53 +1114,104 @@ int main() &#123;
 &#125;</code></pre>
 
       <p class="muted">
-        Orice program C are, de obicei, o funcție <code>main()</code>,
-        de unde începe execuția.
+        Execuția începe din funcția <code>main()</code>.
       </p>
     </div>
 
-    <div class="cheat-card">
-      <h3>2. Variabile și tipuri de date</h3>
+    <div class="cheat-card c-memory-card">
+      <h3>3. Memorie vs fișiere</h3>
 
-      <table class="mini-table">
-        <tr><td><code>int</code></td><td>numere întregi</td></tr>
-        <tr><td><code>char</code></td><td>un caracter</td></tr>
-        <tr><td><code>float</code></td><td>număr real simplu</td></tr>
-        <tr><td><code>double</code></td><td>număr real cu precizie mai mare</td></tr>
-        <tr><td><code>void</code></td><td>fără valoare returnată</td></tr>
-      </table>
+      <div class="memory-compare">
+        <div>
+          <strong>Main memory</strong>
+          <span>temporar</span>
+          <p>Datele se pierd după terminarea programului.</p>
+        </div>
+
+        <div>
+          <strong>File</strong>
+          <span>permanent</span>
+          <p>Datele pot fi păstrate pentru utilizare viitoare.</p>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div class="grep-row">
-      <div class="cheat-card">
-        <h3>3. Input / Output</h3>
+  <div class="cheat-card">
+    <h3>4. Data types in C</h3>
 
-        <pre><code>int age;
+    <div class="c-type-tree">
+      <div class="type-root">Data types in C</div>
+
+      <div class="type-branches">
+        <div class="type-box">
+          <strong>Fundamental</strong>
+          <code>int</code>
+          <code>char</code>
+          <code>float</code>
+          <code>double</code>
+          <code>void</code>
+        </div>
+
+        <div class="type-box">
+          <strong>Derived</strong>
+          <code>array</code>
+          <code>pointer</code>
+          <code>function</code>
+        </div>
+
+        <div class="type-box">
+          <strong>User-defined</strong>
+          <code>struct</code>
+          <code>union</code>
+          <code>enum</code>
+          <code>typedef</code>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grep-row">
+    <div class="cheat-card">
+      <h3>5. Input / Output</h3>
+
+      <pre><code>int age;
 
 printf("Enter age: ");
 scanf("%d", &amp;age);
 
 printf("Age = %d\n", age);</code></pre>
-      </div>
-
-      <div class="cheat-card">
-        <h3>4. Format specifiers</h3>
-
-        <table class="mini-table">
-          <tr><td><code>%d</code></td><td>int</td></tr>
-          <tr><td><code>%c</code></td><td>char</td></tr>
-          <tr><td><code>%f</code></td><td>float</td></tr>
-          <tr><td><code>%lf</code></td><td>double</td></tr>
-          <tr><td><code>%s</code></td><td>string</td></tr>
-        </table>
-      </div>
     </div>
 
-    <div class="grep-row">
-      <div class="cheat-card">
-        <h3>5. Command-line arguments</h3>
+    <div class="cheat-card">
+      <h3>6. Format specifiers</h3>
 
-        <pre><code>int main(int argc, char *argv[]) &#123;
+      <table class="mini-table">
+        <tr><td><code>%d</code></td><td>int</td></tr>
+        <tr><td><code>%c</code></td><td>char</td></tr>
+        <tr><td><code>%f</code></td><td>float</td></tr>
+        <tr><td><code>%lf</code></td><td>double</td></tr>
+        <tr><td><code>%s</code></td><td>string</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="cheat-card c-file-flow-card">
+    <h3>7. File handling în C</h3>
+
+    <div class="file-flow">
+      <div><code>fopen()</code><span>deschide fișierul</span></div>
+      <div><code>fgets()</code><span>citește</span></div>
+      <div><code>fprintf()</code><span>scrie</span></div>
+      <div><code>fclose()</code><span>închide fișierul</span></div>
+    </div>
+  </div>
+
+  <div class="grep-row">
+    <div class="cheat-card">
+      <h3>8. Command-line arguments</h3>
+
+      <pre><code>int main(int argc, char *argv[]) &#123;
     printf("Program name: %s\n", argv[0]);
 
     if (argc &gt; 1) &#123;
@@ -1142,12 +1220,12 @@ printf("Age = %d\n", age);</code></pre>
 
     return 0;
 &#125;</code></pre>
-      </div>
+    </div>
 
-      <div class="cheat-card">
-        <h3>6. File handling</h3>
+    <div class="cheat-card">
+      <h3>9. File handling example</h3>
 
-        <pre><code>FILE *f = fopen("data.txt", "r");
+      <pre><code>FILE *f = fopen("data.txt", "r");
 
 if (f == NULL) &#123;
     printf("File could not be opened\n");
@@ -1155,53 +1233,18 @@ if (f == NULL) &#123;
 &#125;
 
 fclose(f);</code></pre>
-      </div>
     </div>
+  </div>
 
-    <div class="cheat-card">
-      <h3>7. Exemplu: citire fișier linie cu linie</h3>
+  <div class="cheat-card">
+    <h3>10. Practice</h3>
 
-      <pre><code>#include &lt;stdio.h&gt;
-
-int main(int argc, char *argv[]) &#123;
-    FILE *f;
-    char line[256];
-    int count = 0;
-
-    if (argc != 2) &#123;
-        printf("Usage: %s filename\n", argv[0]);
-        return 1;
-    &#125;
-
-    f = fopen(argv[1], "r");
-
-    if (f == NULL) &#123;
-        printf("Cannot open file\n");
-        return 1;
-    &#125;
-
-    while (fgets(line, sizeof(line), f)) &#123;
-        printf("%s", line);
-        count++;
-    &#125;
-
-    fclose(f);
-
-    printf("\nNumber of lines: %d\n", count);
-    return 0;
-&#125;</code></pre>
-    </div>
-
-    <div class="cheat-card">
-      <h3>8. Practice</h3>
-
-      <ul>
-        <li>Primește numele unui fișier ca argument și afișează conținutul.</li>
-        <li>Numără câte linii are fișierul.</li>
-        <li>Primește un fișier și un string și adaugă string-ul la final.</li>
-        <li>Copiază conținutul dintr-un fișier în altul.</li>
-      </ul>
-    </div>
+    <ul>
+      <li>Primește numele unui fișier ca argument și afișează conținutul.</li>
+      <li>Numără câte linii are fișierul.</li>
+      <li>Primește un fișier și un string și adaugă string-ul la final.</li>
+      <li>Copiază conținutul dintr-un fișier în altul.</li>
+    </ul>
   </div>
 
   <p class="warn">
