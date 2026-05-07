@@ -8,4 +8,11 @@ import { ShellGuideComponent } from './components/shell-guide/shell-guide.compon
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {}
+export class AppComponent {
+  theme: 'dark' | 'light' = 'dark';
+
+toggleTheme(): void {
+  this.theme = this.theme === 'dark' ? 'light' : 'dark';
+}}
+
+

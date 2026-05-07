@@ -12,6 +12,12 @@ import { LAB_IMAGES } from '../../data/guide.data';
   styleUrl: './shell-guide.component.scss'
 })
 export class ShellGuideComponent {
+  theme: 'dark' | 'light' = 'dark';
+
+toggleTheme(): void {
+  this.theme = this.theme === 'dark' ? 'light' : 'dark';
+}
+
   tabs: GuideTab[] = GUIDE_TABS;
   badges: BadgeItem[] = GUIDE_BADGES;
   quizQuestions: QuizQuestion[] = QUIZ_QUESTIONS;

@@ -8,6 +8,7 @@ export const GUIDE_TABS: GuideTab[] = [
   { id: "grep", label: "grep" },
   { id: "sed", label: "sed" },
   { id: "awk", label: "awk" },
+  { id: 'c', label: 'C' },
   { id: "quiz", label: "Quiz" },
 ];
 
