@@ -10,6 +10,8 @@ export const GUIDE_TABS: GuideTab[] = [
   { id: "awk", label: "awk" },
   { id: 'c', label: 'C' },
   { id: "quiz", label: "Quiz" },
+  { id: 'exam', label: 'Examen Practic' },
+  { id: 'grades', label: 'Student Scores' }
 ];
 
 export const GUIDE_BADGES: BadgeItem[] = [

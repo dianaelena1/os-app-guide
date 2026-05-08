@@ -7,19 +7,25 @@
   </div>
 
   <div class="intro-content">
-    <h2>Operating Systems Guide</h2>
+    <h2 class="typing-title" aria-label="Operating Systems Guide">
+      <span class="typing-text">Operating Systems Guide</span>
+    </h2>
 
-    <div class="hero-pill">
+    <div class="hero-pill hero-reveal delay-1">
       Linux • Shell scripting • C programming
     </div>
 
-    <p>
+    <p class="hero-reveal delay-2">
       Un ghid interactiv pentru laborator, cu exemple clare,
       cheatsheets și quiz-uri pentru studenți.
     </p>
 
-    <button type="button" class="scroll-hint" (click)="scrollToGuide.emit()">
-      Scroll to start
-    </button>
+    <button
+  type="button"
+  class="scroll-hint hero-reveal delay-3"
+  (click)="scrollToGuide.emit()"
+>
+  <span>Scroll to start</span>
+</button>
   </div>
 </section>
