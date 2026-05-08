@@ -13,7 +13,6 @@ import { GuideTab } from '../../../../models/guide.models';
 })
 export class GuideMenuComponent {
   private router = inject(Router);
-
   private authService = inject(AuthService);
 
   displayName$ = this.authService.displayName$;
@@ -43,7 +42,7 @@ export class GuideMenuComponent {
   }
 
   if (tabId === 'exam') {
-    window.location.href = '/exam';
+    this.router.navigate(['/exam']);
     return;
   }
 
