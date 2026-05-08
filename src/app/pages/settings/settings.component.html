@@ -1,0 +1,55 @@
+<div class="settings-page">
+  <section class="settings-card">
+    <div class="settings-header">
+      <div>
+        <p class="eyebrow">Operating Systems</p>
+
+        <h1>
+          Settings
+          <span *ngIf="displayName$ | async as displayName">
+            {{ displayName }}
+          </span>
+        </h1>
+
+        <p class="description">
+          Aici poți vedea informațiile contului cu care ești autentificat în aplicație.
+        </p>
+      </div>
+
+      <a routerLink="/" class="back-button">
+        Înapoi la ghid
+      </a>
+    </div>
+
+    <div class="profile-box" *ngIf="user$ | async as user">
+      <div class="avatar">
+        {{ (user.email || 'S').charAt(0).toUpperCase() }}
+      </div>
+
+      <div class="profile-info">
+        <div class="info-row">
+          <span>Nume afișat</span>
+          <strong *ngIf="displayName$ | async as displayName">
+            {{ displayName }}
+          </strong>
+        </div>
+
+        <div class="info-row">
+          <span>Email</span>
+          <strong>{{ user.email }}</strong>
+        </div>
+
+        <div class="info-row">
+          <span>User ID</span>
+          <strong class="uid">{{ user.uid }}</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-actions">
+      <button type="button" class="logout-button" (click)="logout()">
+        Log out
+      </button>
+    </div>
+  </section>
+</div>

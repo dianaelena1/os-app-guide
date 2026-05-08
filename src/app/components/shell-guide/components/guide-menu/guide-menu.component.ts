@@ -48,4 +48,8 @@ export class GuideMenuComponent {
 
   this.tabSelected.emit(tabId);
 }
+
+openSettings(): void {
+  this.router.navigate(['/settings']);
+}
 }
