@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 import { GUIDE_BADGES, GUIDE_TABS, QUIZ_QUESTIONS } from '../../data/guide.data';
 import { BadgeItem, GuideTab, QuizQuestion } from '../../models/guide.models';
@@ -58,7 +59,7 @@ export class ShellGuideComponent {
   selectedImage: string | null = null;
   showScrollTop = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,  private authService: AuthService) {}
 
   setActiveTab(tabId: string): void {
     this.activeTab = tabId;
@@ -72,9 +73,11 @@ export class ShellGuideComponent {
     this.isUserMenuOpen = !this.isUserMenuOpen;
   }
 
-  logout(): void {
+ logout(): void {
+  this.authService.logout().then(() => {
     this.router.navigate(['/login']);
-  }
+  });
+}
 
   toggleTheme(): void {
     this.theme = this.theme === 'dark' ? 'light' : 'dark';
