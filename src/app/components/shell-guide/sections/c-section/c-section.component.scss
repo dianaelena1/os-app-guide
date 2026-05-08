@@ -1,0 +1,246 @@
+@use '../../styles/section-shared.scss';
+
+.c-hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: flex-start;
+  margin-bottom: 22px;
+}
+
+.c-hero h2 {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  line-height: 1.15;
+}
+
+.c-hero h2 span {
+  color: #a78bfa;
+}
+
+.c-logo {
+  min-width: 120px;
+  padding: 16px;
+  border-radius: 22px;
+  background: rgba(2, 6, 23, 0.9);
+  border: 1px solid rgba(167, 139, 250, 0.35);
+  color: #a78bfa;
+  text-align: center;
+  box-shadow: 0 0 35px rgba(167, 139, 250, 0.12);
+}
+
+.c-logo code {
+  color: inherit;
+}
+
+.terminal-dot.purple {
+  background: #a78bfa;
+  box-shadow: 0 0 18px #a78bfa;
+}
+
+/* Flow: Source file -> Compile -> Run -> Output */
+
+.c-flow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  gap: 28px;
+  align-items: stretch;
+}
+
+.c-flow-step {
+  min-width: 0;
+  padding: 16px;
+  background: rgba(2, 6, 23, 0.55);
+  border: 1px solid rgba(167, 139, 250, 0.22);
+  border-radius: 18px;
+}
+
+.c-flow-step span {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #a78bfa;
+  color: #020617;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+.c-flow-step strong {
+  display: block;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.c-flow-step code {
+  display: block;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  color: #f8fafc;
+}
+
+/* Memory vs files */
+
+.memory-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.memory-compare div {
+  background: rgba(2, 6, 23, 0.55);
+  border: 1px solid rgba(167, 139, 250, 0.22);
+  border-radius: 18px;
+  padding: 16px;
+}
+
+.memory-compare strong {
+  display: block;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.memory-compare span {
+  display: inline-block;
+  color: #a78bfa;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.memory-compare p {
+  margin-bottom: 0;
+}
+
+/* Data types tree */
+
+.c-type-tree {
+  text-align: center;
+}
+
+.type-root {
+  display: inline-block;
+  padding: 14px 22px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #a78bfa, #60a5fa);
+  color: #020617;
+  font-weight: 900;
+  margin-bottom: 18px;
+}
+
+.type-branches {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.type-box {
+  background: rgba(2, 6, 23, 0.55);
+  border: 1px solid rgba(167, 139, 250, 0.22);
+  border-radius: 18px;
+  padding: 16px;
+}
+
+.type-box strong {
+  display: block;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.type-box code {
+  display: inline-block;
+  margin: 5px;
+  color: #a78bfa;
+}
+
+/* File handling flow */
+
+.file-flow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.file-flow div {
+  background: rgba(2, 6, 23, 0.55);
+  border: 1px solid rgba(167, 139, 250, 0.22);
+  border-radius: 18px;
+  padding: 16px;
+}
+
+.file-flow code {
+  display: block;
+  color: #a78bfa;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.file-flow span {
+  color: var(--muted);
+}
+
+/* Tables */
+
+.c-section .mini-table td:first-child,
+.mini-table td:first-child {
+  color: #a78bfa;
+  font-weight: 700;
+}
+
+/* Light mode */
+
+:host-context(.light-mode) .c-logo {
+  background: #ffffff;
+  border-color: rgba(124, 58, 237, 0.25);
+}
+
+:host-context(.light-mode) .c-logo code {
+  color: #7c3aed;
+}
+
+:host-context(.light-mode) .terminal-dot.purple {
+  background: #7c3aed;
+  box-shadow: 0 0 18px rgba(124, 58, 237, 0.65);
+}
+
+:host-context(.light-mode) .c-flow-step,
+:host-context(.light-mode) .file-flow div,
+:host-context(.light-mode) .type-box,
+:host-context(.light-mode) .memory-compare div {
+  background: #ffffff;
+  border-color: rgba(124, 58, 237, 0.18);
+}
+
+:host-context(.light-mode) .c-flow-step strong,
+:host-context(.light-mode) .type-box strong,
+:host-context(.light-mode) .memory-compare strong {
+  color: #0f172a;
+}
+
+:host-context(.light-mode) .c-flow-step code {
+  color: #0f172a;
+}
+
+:host-context(.light-mode) .type-box code,
+:host-context(.light-mode) .file-flow code,
+:host-context(.light-mode) .memory-compare span {
+  color: #7c3aed;
+}
+
+/* Responsive */
+
+@media (max-width: 1000px) {
+  .c-hero {
+    flex-direction: column;
+  }
+
+  .c-logo {
+    width: 100%;
+  }
+
+  .c-flow,
+  .file-flow,
+  .type-branches,
+  .memory-compare {
+    grid-template-columns: 1fr;
+  }
+}

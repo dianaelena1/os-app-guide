@@ -1,0 +1,33 @@
+@use '../../styles/section-shared.scss';
+
+.badge {
+  display: inline-block;
+  background: rgba(8, 47, 73, 0.9);
+  color: #bae6fd;
+  border: 1px solid #0ea5e9;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  padding: 10px 14px;
+  border-radius: 999px;
+}
+
+.quizq {
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.quiz-options {
+  margin: 12px 0;
+  padding-left: 20px;
+}
+
+.quizq button {
+  margin-top: 8px;
+  border: 1px solid var(--border);
+  background: #0f1a2f;
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+}

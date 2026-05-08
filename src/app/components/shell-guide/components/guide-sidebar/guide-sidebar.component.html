@@ -1,0 +1,114 @@
+<aside class="sidebar">
+  <ng-container *ngIf="isActiveTab('c')">
+    <h3>C – Să reținem</h3>
+    <ul>
+      <li><code>C</code> este un limbaj procedural, folosit mult pe Unix/Linux.</li>
+      <li>Programul pornește de obicei din funcția <code>main()</code>.</li>
+      <li>Variabilele au tip fix: <code>int</code>, <code>char</code>, <code>float</code>, <code>double</code>.</li>
+      <li><code>printf()</code> afișează date, iar <code>scanf()</code> citește date.</li>
+      <li>Fișierele se lucrează cu <code>FILE *</code>, <code>fopen()</code>, <code>fgets()</code>, <code>fprintf()</code>, <code>fclose()</code>.</li>
+      <li>Argumentele din linia de comandă se citesc cu <code>argc</code> și <code>argv</code>.</li>
+    </ul>
+  </ng-container>
+
+  <ng-container *ngIf="isActiveTab('overview')">
+    <h3>Ghid rapid</h3>
+    <p class="muted">
+      Scopul acestui ghid este să vă ajute să înțelegeți mai ușor cum gândiți comenzile în shell scripting.
+    </p>
+
+    <ul>
+      <li><strong>1. Începeți de la problemă.</strong><br />Ce vreau să obțin?</li>
+      <li><strong>2. Gândiți input-ul și output-ul.</strong><br />Ce primește comanda? Ce produce?</li>
+      <li><strong>3. Alegeți tool-ul potrivit.</strong><br /><code>grep</code>, <code>sed</code>, <code>awk</code>, <code>chmod</code>.</li>
+      <li><strong>4. Mergeți de la simplu la combinat.</strong><br />Comandă simplă → opțiuni → pipe.</li>
+      <li><strong>5. Testați cu exemple mici.</strong><br />Mai întâi pe 3–4 linii.</li>
+    </ul>
+
+    <h3>Întrebări utile</h3>
+    <div *ngFor="let badge of badges" class="badge">
+      {{ badge.label }}
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="isActiveTab('basics')">
+    <h3>Basics – ce trebuie reținut</h3>
+    <ul>
+      <li><strong>Linux pornește de la root:</strong> <code>/</code></li>
+      <li><strong>Shell-ul</strong> primește comenzi de la utilizator.</li>
+      <li><strong>Kernel-ul</strong> comunică direct cu hardware-ul.</li>
+      <li><strong>stdin</strong> = input, <strong>stdout</strong> = output, <strong>stderr</strong> = erori.</li>
+      <li><strong>Pipe:</strong> output-ul unei comenzi devine input pentru alta.</li>
+    </ul>
+  </ng-container>
+
+  <ng-container *ngIf="isActiveTab('ls')">
+    <h3>ls – Să reținem</h3>
+    <ul>
+      <li><code>ls</code> afișează conținutul unui director.</li>
+      <li><code>ls -l</code> afișează detalii.</li>
+      <li><code>ls -a</code> afișează și fișierele ascunse.</li>
+      <li><code>ls -lh</code> afișează dimensiuni ușor de citit.</li>
+      <li>În Linux, structura directoarelor pornește de la <code>/</code>.</li>
+    </ul>
+  </ng-container>
+
+  <ng-container *ngIf="isActiveTab('chmod')">
+    <h3>chmod – Să reținem</h3>
+    <ul>
+      <li><code>chmod</code> schimbă permisiunile.</li>
+      <li><code>r</code> = read = 4</li>
+      <li><code>w</code> = write = 2</li>
+      <li><code>x</code> = execute = 1</li>
+      <li><code>755</code> înseamnă owner: <code>rwx</code>, group: <code>r-x</code>, others: <code>r-x</code>.</li>
+      <li><code>644</code> este comun pentru fișiere text.</li>
+    </ul>
+  </ng-container>
+
+  <ng-container *ngIf="isActiveTab('grep')">
+    <h3>grep – Să reținem</h3>
+    <ul>
+      <li><code>grep</code> caută linii care conțin un pattern.</li>
+      <li><code>-i</code> ignoră litere mari/mici.</li>
+      <li><code>-r</code> caută recursiv în directoare.</li>
+      <li><code>-n</code> afișează numărul liniei.</li>
+      <li><code>-v</code> inversează căutarea.</li>
+      <li><code>-E</code> permite regex extins.</li>
+    </ul>
+  </ng-container>
+
+  <ng-container *ngIf="isActiveTab('sed')">
+    <h3>sed – Să reținem</h3>
+    <ul>
+      <li><code>sed</code> editează text în flux.</li>
+      <li><code>-n</code> oprește afișarea automată.</li>
+      <li><code>p</code> afișează linia.</li>
+      <li><code>d</code> șterge linia.</li>
+      <li><code>s/vechi/nou/</code> face substituție.</li>
+      <li><code>-i</code> modifică fișierul direct — atenție!</li>
+    </ul>
+  </ng-container>
+
+  <ng-container *ngIf="isActiveTab('awk')">
+    <h3>awk – Să reținem</h3>
+    <ul>
+      <li><code>awk</code> lucrează foarte bine pe coloane.</li>
+      <li><code>$1</code> = prima coloană.</li>
+      <li><code>$2</code> = a doua coloană.</li>
+      <li><code>NF</code> = numărul de câmpuri.</li>
+      <li><code>NR</code> = numărul liniei.</li>
+      <li><code>-F</code> setează separatorul.</li>
+    </ul>
+  </ng-container>
+
+  <ng-container *ngIf="isActiveTab('quiz')">
+    <h3>Quiz: Întrebări și răspunsuri</h3>
+    <ul>
+      <li>Citește comanda de la stânga la dreapta.</li>
+      <li>Identifică întâi comanda principală.</li>
+      <li>Verifică opțiunile: <code>-l</code>, <code>-a</code>, <code>-n</code>, <code>-i</code>.</li>
+      <li>Gândește input-ul și output-ul.</li>
+      <li>Nu ghici: explică de ce răspunsul e corect.</li>
+    </ul>
+  </ng-container>
+</aside>

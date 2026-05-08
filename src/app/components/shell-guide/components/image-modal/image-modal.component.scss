@@ -1,0 +1,42 @@
+.image-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: rgba(2, 6, 23, 0.88);
+  backdrop-filter: blur(10px);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.image-modal img {
+  max-width: min(1100px, 94vw);
+  max-height: 86vh;
+  border-radius: 22px;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.6);
+}
+
+.image-modal-close {
+  position: fixed;
+  top: 24px;
+  right: 28px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(15, 23, 42, 0.85);
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .image-modal {
+    padding: 14px;
+  }
+
+  .image-modal img {
+    max-width: 96vw;
+    max-height: 80vh;
+  }
+}

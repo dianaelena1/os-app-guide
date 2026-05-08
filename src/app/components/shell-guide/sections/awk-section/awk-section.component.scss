@@ -1,0 +1,57 @@
+@use '../../styles/section-shared.scss';
+
+.awk-hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: flex-start;
+  margin-bottom: 22px;
+}
+
+.awk-hero h2 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+}
+
+.awk-hero h2 span {
+  color: #60a5fa;
+}
+
+.awk-logo {
+  min-width: 120px;
+  padding: 16px;
+  border-radius: 22px;
+  background: rgba(2, 6, 23, 0.9);
+  border: 1px solid rgba(96, 165, 250, 0.35);
+  color: #60a5fa;
+  text-align: center;
+  box-shadow: 0 0 35px rgba(96, 165, 250, 0.12);
+}
+
+.terminal-dot.blue {
+  background: #60a5fa;
+  box-shadow: 0 0 18px #60a5fa;
+}
+
+.awk-cheatsheet {
+  display: grid;
+  gap: 18px;
+  margin: 24px 0;
+}
+
+.mini-table td:first-child {
+  color: #60a5fa;
+  font-weight: 700;
+}
+
+@media (max-width: 1000px) {
+  .awk-hero {
+    flex-direction: column;
+  }
+
+  .awk-logo {
+    width: 100%;
+  }
+}
+.awk-logo code {
+  color: inherit;
+}

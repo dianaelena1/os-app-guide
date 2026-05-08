@@ -1,0 +1,27 @@
+<div class="card" (mousemove)="cardMouseMove.emit($event)">
+  <h2>Quiz</h2>
+
+  <div class="quizq" *ngFor="let question of quizQuestions">
+    <div class="badge">{{ question.lab }}</div>
+
+    <strong>{{ question.question }}</strong>
+
+    <ul class="quiz-options">
+      <li *ngFor="let option of question.options">
+        {{ option }}
+      </li>
+    </ul>
+
+    <button type="button" (click)="toggleAnswer(question.id)">
+      Arată răspunsul
+    </button>
+
+    <div class="answer" *ngIf="isAnswerOpen(question.id)">
+      <strong>Răspuns corect:</strong> {{ question.correctAnswer }}
+
+      <div *ngIf="question.explanation" class="muted" style="margin-top: 8px">
+        {{ question.explanation }}
+      </div>
+    </div>
+  </div>
+</div>

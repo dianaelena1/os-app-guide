@@ -1,0 +1,54 @@
+<div class="card" (mousemove)="cardMouseMove.emit($event)">
+  <h2>1. Overview</h2>
+  <p>
+    În shell scripting, multe probleme se rezolvă prin combinarea unor
+    unelte simple. Gândește fiecare comandă ca pe o piesă cu un rol clar:
+  </p>
+
+  <table class="table">
+    <tr>
+      <th>Tool</th>
+      <th>Utilitate</th>
+      <th>Mod de abordare</th>
+    </tr>
+    <tr>
+      <td><code>chmod</code></td>
+      <td>schimbă permisiunile</td>
+      <td>Cine are voie să citească, scrie sau execute?</td>
+    </tr>
+    <tr>
+      <td><code>grep</code></td>
+      <td>caută linii după pattern</td>
+      <td>Ce linii vrem să găsim?</td>
+    </tr>
+    <tr>
+      <td><code>sed</code></td>
+      <td>editează textul în flux</td>
+      <td>Ce vrem să transformăm?</td>
+    </tr>
+    <tr>
+      <td><code>awk</code></td>
+      <td>lucrează pe câmpuri/coloane</td>
+      <td>Ce coloane vrem să extragem sau calculăm?</td>
+    </tr>
+  </table>
+
+  <div class="example">
+    <div class="mini">
+      <h3>Steps</h3>
+      <ol>
+        <li>identific problema</li>
+        <li>aleg comanda principală</li>
+        <li>adaug opțiuni</li>
+        <li>combin cu pipe sau redirectare</li>
+      </ol>
+    </div>
+
+    <div class="mini">
+      <h3>Exemplu</h3>
+      <pre><code>cat log.txt | grep -i error | wc -l</code></pre>
+      <p class="muted">Mai bine, fără <code>cat</code> inutil:</p>
+      <pre><code>grep -i error log.txt | wc -l</code></pre>
+    </div>
+  </div>
+</div>

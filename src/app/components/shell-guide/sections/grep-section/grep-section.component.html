@@ -1,0 +1,109 @@
+<div class="card grep-section" (mousemove)="cardMouseMove.emit($event)">
+  <div class="grep-hero">
+    <div>
+      <h2>5. Linux <span>GREP</span> Cheatsheet</h2>
+      <p>
+        <code>grep</code> este o comandă Unix folosită pentru a căuta un pattern de text
+        într-un fișier sau într-un flux de date.
+      </p>
+    </div>
+
+    <div class="grep-logo">
+      <div class="terminal-dot"></div>
+      <code>grep</code>
+    </div>
+  </div>
+
+  <div class="cheat-card grep-meaning">
+    <h3>grep = g/re/p</h3>
+
+    <div class="meaning-line">
+      <span>g</span>
+      <small>global</small>
+      <span>/re/</span>
+      <small>regular expression</small>
+      <span>p</span>
+      <small>print</small>
+    </div>
+  </div>
+
+  <div class="grep-cheatsheet">
+    <div class="cheat-card">
+      <h3>1. Usage</h3>
+      <pre><code>grep [opțiuni] pattern [fișier]
+grep "sequence" file_1.txt
+grep sequence file_1.txt file_2.txt
+echo "This is a test" | grep "is"</code></pre>
+
+      <p class="muted">
+        Pattern-ul poate fi un cuvânt simplu sau o expresie regulată.
+        <code>grep</code> poate căuta într-un fișier, în mai multe fișiere sau în output-ul altei comenzi.
+      </p>
+    </div>
+
+    <div class="cheat-card">
+      <h3>2. Opțiuni importante</h3>
+
+      <div class="option-list">
+        <div><code>-i</code><span>ignoră diferența dintre litere mari și mici</span></div>
+        <div><code>-r</code><span>caută recursiv în directoare</span></div>
+        <div><code>-l</code><span>afișează doar numele fișierelor cu match</span></div>
+        <div><code>-c</code><span>afișează numărul de potriviri</span></div>
+        <div><code>-w</code><span>potrivește doar cuvântul întreg</span></div>
+        <div><code>-n</code><span>afișează și numărul liniei</span></div>
+        <div><code>-v</code><span>afișează liniile care NU conțin patternul</span></div>
+        <div><code>-E</code><span>folosește expresii regulate extinse</span></div>
+        <div><code>-A n</code><span>afișează n linii după match</span></div>
+        <div><code>-B n</code><span>afișează n linii înainte de match</span></div>
+        <div><code>-C n</code><span>afișează n linii înainte și după match</span></div>
+      </div>
+    </div>
+
+    <div class="grep-row">
+      <div class="cheat-card">
+        <h3>3. Wildcard-uri</h3>
+        <table class="mini-table">
+          <tr><td><code>.</code></td><td>orice caracter</td></tr>
+          <tr><td><code>?</code></td><td>zero sau un caracter</td></tr>
+          <tr><td><code>*</code></td><td>zero sau mai multe caractere</td></tr>
+          <tr><td><code>+</code></td><td>unul sau mai multe caractere</td></tr>
+        </table>
+      </div>
+
+      <div class="cheat-card">
+        <h3>4. Poziții</h3>
+        <table class="mini-table">
+          <tr><td><code>^</code></td><td>început de linie</td></tr>
+          <tr><td><code>$</code></td><td>sfârșit de linie</td></tr>
+          <tr><td><code>^$</code></td><td>linie goală</td></tr>
+          <tr><td><code>\b</code></td><td>limită de cuvânt</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="grep-row">
+      <div class="cheat-card">
+        <h3>5. Clase de caractere</h3>
+        <table class="mini-table">
+          <tr><td><code>[A-Z]</code></td><td>litere mari</td></tr>
+          <tr><td><code>[a-z]</code></td><td>litere mici</td></tr>
+          <tr><td><code>[0-9]</code></td><td>cifre</td></tr>
+          <tr><td><code>[A-Za-z0-9]</code></td><td>litere sau cifre</td></tr>
+          <tr><td><code>[^abc]</code></td><td>orice caracter în afară de a, b, c</td></tr>
+        </table>
+      </div>
+
+      <div class="cheat-card">
+        <h3>6. POSIX</h3>
+        <table class="mini-table">
+          <tr><td><code>[:alpha:]</code></td><td>litere</td></tr>
+          <tr><td><code>[:digit:]</code></td><td>cifre</td></tr>
+          <tr><td><code>[:alnum:]</code></td><td>litere sau cifre</td></tr>
+          <tr><td><code>[:lower:]</code></td><td>litere mici</td></tr>
+          <tr><td><code>[:upper:]</code></td><td>litere mari</td></tr>
+          <tr><td><code>[:space:]</code></td><td>spații</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

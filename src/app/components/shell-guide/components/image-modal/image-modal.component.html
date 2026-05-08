@@ -1,0 +1,15 @@
+<div class="image-modal" (click)="closed.emit()">
+  <button
+    type="button"
+    class="image-modal-close"
+    (click)="closed.emit(); $event.stopPropagation()"
+  >
+    ×
+  </button>
+
+  <img
+    [src]="selectedImage"
+    alt="Preview image"
+    (click)="$event.stopPropagation()"
+  />
+</div>

@@ -1,0 +1,62 @@
+@use '../../styles/section-shared.scss';
+
+.grep-hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: flex-start;
+  margin-bottom: 22px;
+}
+
+.grep-hero h2 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+}
+
+.grep-hero h2 span {
+  color: #34d399;
+}
+
+.grep-logo {
+  min-width: 120px;
+  padding: 16px;
+  border-radius: 22px;
+  background: rgba(2, 6, 23, 0.9);
+  border: 1px solid rgba(52, 211, 153, 0.35);
+  color: #34d399;
+  text-align: center;
+  box-shadow: 0 0 35px rgba(52, 211, 153, 0.12);
+}
+
+.grep-cheatsheet {
+  display: grid;
+  gap: 18px;
+  margin: 24px 0;
+}
+
+.grep-meaning {
+  border-color: rgba(251, 146, 60, 0.5);
+  background: linear-gradient(
+    90deg,
+    rgba(251, 146, 60, 0.08),
+    rgba(52, 211, 153, 0.06)
+  );
+}
+
+.option-list code,
+.mini-table td:first-child {
+  color: #34d399;
+  font-weight: 700;
+}
+
+@media (max-width: 1000px) {
+  .grep-hero {
+    flex-direction: column;
+  }
+
+  .grep-logo {
+    width: 100%;
+  }
+}
+.grep-logo code {
+  color: inherit;
+}

@@ -1,0 +1,80 @@
+@use '../../styles/section-shared.scss';
+
+.image-preview {
+  position: relative;
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin: 20px auto;
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.image-preview img {
+  display: block;
+  width: 100%;
+  border-radius: 18px;
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.image-preview:hover img {
+  transform: scale(1.03);
+  filter: brightness(0.55);
+}
+
+.image-eye {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 2.4rem;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  color: white;
+  background: rgba(2, 6, 23, 0.25);
+}
+
+.image-preview:hover .image-eye {
+  opacity: 1;
+}
+
+.flash {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.flashcard,
+.mini {
+  padding: 16px;
+  border-radius: 18px;
+}
+
+.command-structure {
+  font-family: Consolas, Menlo, monospace;
+  background: #020617;
+  border: 1px solid #334155;
+  padding: 14px 16px;
+  border-radius: 16px;
+  display: inline-block;
+  color: #e2e8f0;
+}
+
+.command-part {
+  color: #ffffff;
+}
+
+.option-part {
+  color: #22c55e;
+  margin: 0 6px;
+}
+
+.value-part {
+  color: #38bdf8;
+}
+
+a {
+  color: #3974c7;
+  text-decoration: none;
+}

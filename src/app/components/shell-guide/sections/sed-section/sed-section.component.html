@@ -1,0 +1,134 @@
+<div class="card sed-section">
+  <div class="sed-hero">
+    <div>
+      <h2>6. Linux <span>SED</span> Command Cheatsheet</h2>
+      <p>
+        <code>sed</code> vine de la <strong>stream editor</strong> și este folosit
+        pentru a transforma, filtra sau edita text direct din linia de comandă.
+      </p>
+    </div>
+
+    <div class="sed-logo">
+      <div class="terminal-dot orange"></div>
+      <code>sed</code>
+    </div>
+  </div>
+
+  <div class="cheat-card sed-meaning">
+    <h3>sed = s/ed</h3>
+
+    <div class="meaning-line">
+      <span>s</span>
+      <small>stream</small>
+      <span>/ed/</span>
+      <small>editor</small>
+    </div>
+  </div>
+
+  <div class="sed-cheatsheet">
+    <div class="cheat-card">
+      <h3>1. Sintaxă</h3>
+      <pre><code>sed [-n] [-e] 'command' [input-file]
+sed 'p' employees.txt
+sed -n 'p' employees.txt</code></pre>
+
+      <p class="muted">
+        Fără <code>-n</code>, <code>sed</code> afișează automat liniile procesate.
+        De aceea, uneori pare că o linie este afișată de două ori.
+      </p>
+    </div>
+
+    <div class="cheat-card">
+      <h3>2. Opțiuni importante</h3>
+
+      <div class="option-list sed-options">
+        <div><code>-n</code><span>suprimă afișarea automată</span></div>
+        <div><code>-e</code><span>permite mai multe expresii sed</span></div>
+        <div><code>-f</code><span>citește scriptul sed dintr-un fișier</span></div>
+        <div><code>-i</code><span>modifică fișierul direct</span></div>
+        <div><code>-E</code><span>folosește expresii regulate extinse</span></div>
+      </div>
+    </div>
+
+    <div class="grep-row">
+      <div class="cheat-card">
+        <h3>3. Comenzi sed</h3>
+        <table class="mini-table">
+          <tr><td><code>p</code></td><td>afișează linia</td></tr>
+          <tr><td><code>d</code></td><td>șterge linia</td></tr>
+          <tr><td><code>s</code></td><td>substituie text</td></tr>
+          <tr><td><code>a</code></td><td>adaugă text după linie</td></tr>
+          <tr><td><code>i</code></td><td>inserează text înainte de linie</td></tr>
+          <tr><td><code>c</code></td><td>înlocuiește linia completă</td></tr>
+          <tr><td><code>q</code></td><td>oprește procesarea</td></tr>
+          <tr><td><code>r</code></td><td>citește text din alt fișier</td></tr>
+          <tr><td><code>w</code></td><td>scrie rezultatul într-un fișier</td></tr>
+        </table>
+      </div>
+
+      <div class="cheat-card">
+        <h3>4. Selectarea liniilor</h3>
+        <pre><code>sed -n '2p' employees.txt
+sed -n '2,5p' employees.txt
+sed '$p' employees.txt
+sed -n '/Tudor/p' employees.txt
+sed -n '/Ion/,/Victor/p' employees.txt
+sed -n -e '2p' -e '5p' employees.txt</code></pre>
+      </div>
+    </div>
+
+    <div class="grep-row">
+      <div class="cheat-card">
+        <h3>5. Ștergerea liniilor</h3>
+        <pre><code>sed 'd' employees.txt
+sed '4d' employees.txt
+sed '/Tudor/d' employees.txt
+sed '2,10d' employees.txt
+sed '/Tudor/,$d' employees.txt
+sed -e '2d' -e '5d' employees.txt</code></pre>
+      </div>
+
+      <div class="cheat-card">
+        <h3>6. Substituția</h3>
+        <pre><code>sed 's/Tudor/Todorutz/' employees.txt
+sed 's/19/18/g' employees.txt
+sed -n 's/1931/1932/p' employees.txt
+sed -n 's/1931/1932/gp' employees.txt</code></pre>
+
+        <p class="muted">
+          <code>s/vechi/nou/</code> înlocuiește prima apariție de pe fiecare linie.
+          Cu <code>g</code>, se înlocuiesc toate aparițiile de pe linie.
+        </p>
+      </div>
+    </div>
+
+    <div class="grep-row">
+      <div class="cheat-card">
+        <h3>7. Grupuri și backreferences</h3>
+        <pre><code>sed -n 's/\(Ion\)el/\1ut/p' employees.txt
+sed -n 's/\(Vasi\)le\b/\1lica/p' employees.txt
+sed -E -e 'p' -e 's/([0-9])\1$/\1\1.5/' employees.txt</code></pre>
+
+        <p class="muted">
+          Cu paranteze poți grupa o secvență și o poți refolosi prin
+          <code>\1</code>, <code>\2</code> etc.
+        </p>
+      </div>
+
+      <div class="cheat-card">
+        <h3>8. Alte comenzi utile</h3>
+        <pre><code>sed '3a line added' employees.txt
+sed '2c retired employee' employees.txt
+sed '1i \t\t\t PERSONAL DATA' employees.txt
+sed '5q' employees.txt
+sed '3r sed_dog_and_cat.txt' employees.txt
+sed -n 'w employee.bak' employees.txt</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <p class="warn">
+    Atenție: opțiunea <code>-i</code> modifică fișierul direct. Este utilă, dar
+    periculoasă la început.
+  </p>
+</div>

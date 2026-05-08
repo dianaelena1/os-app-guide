@@ -1,0 +1,32 @@
+<div class="guide-menu-wrap">
+  <nav class="floating-menu">
+    <div class="menu-left">
+      <button
+        *ngFor="let tab of tabs"
+        type="button"
+        class="menu-tab"
+        [class.active]="activeTab === tab.id"
+        (click)="tabSelected.emit(tab.id)"
+      >
+        {{ tab.label }}
+      </button>
+    </div>
+
+    <div class="menu-right">
+      <button type="button" class="menu-icon" (click)="themeToggled.emit()">
+        {{ theme === 'dark' ? '☀️' : '🌙' }}
+      </button>
+
+      <div class="user-menu">
+        <button type="button" class="menu-icon" (click)="userMenuToggled.emit()">
+          👤
+        </button>
+
+        <div class="user-dropdown" *ngIf="isUserMenuOpen">
+          <button type="button">Settings</button>
+          <button type="button" (click)="logoutClicked.emit()">Log out</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>

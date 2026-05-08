@@ -1,0 +1,118 @@
+<div class="card awk-section" (mousemove)="cardMouseMove.emit($event)">
+  <div class="awk-hero">
+    <div>
+      <h2>7. Linux <span>AWK</span> Cheatsheet</h2>
+      <p>
+        <code>awk</code> este folosit pentru procesarea textului pe coloane/câmpuri,
+        filtrare, condiții și calcule simple.
+      </p>
+    </div>
+
+    <div class="awk-logo">
+      <div class="terminal-dot blue"></div>
+      <code>awk</code>
+    </div>
+  </div>
+
+  <div class="awk-cheatsheet">
+    <div class="cheat-card">
+      <h3>1. AWK basics</h3>
+      <pre><code>awk '&#123;print $1&#125;' data.txt
+awk '&#123;print $1, $3&#125;' data.txt
+awk '$3 &gt; 100 &#123;print $1, $3&#125;' sales.txt
+awk -F: '&#123;print $1&#125;' /etc/passwd
+awk '&#123;sum += $2&#125; END &#123;print sum&#125;' prices.txt</code></pre>
+
+      <p class="muted">
+        AWK citește linie cu linie și împarte fiecare linie în câmpuri.
+      </p>
+    </div>
+
+    <div class="cheat-card">
+      <h3>2. Variabile built-in</h3>
+      <table class="mini-table">
+        <tr><td><code>$1</code></td><td>primul câmp</td></tr>
+        <tr><td><code>$2</code></td><td>al doilea câmp</td></tr>
+        <tr><td><code>$NF</code></td><td>ultimul câmp</td></tr>
+        <tr><td><code>NF</code></td><td>numărul de câmpuri</td></tr>
+        <tr><td><code>NR</code></td><td>numărul liniei curente</td></tr>
+        <tr><td><code>FS</code></td><td>separatorul de câmpuri</td></tr>
+        <tr><td><code>OFS</code></td><td>separatorul pentru output</td></tr>
+        <tr><td><code>FILENAME</code></td><td>numele fișierului curent</td></tr>
+      </table>
+    </div>
+
+    <div class="grep-row">
+      <div class="cheat-card">
+        <h3>3. Operatori aritmetici</h3>
+        <table class="mini-table">
+          <tr><td><code>+</code></td><td>adunare</td></tr>
+          <tr><td><code>-</code></td><td>scădere</td></tr>
+          <tr><td><code>*</code></td><td>înmulțire</td></tr>
+          <tr><td><code>/</code></td><td>împărțire</td></tr>
+          <tr><td><code>%</code></td><td>modulo</td></tr>
+          <tr><td><code>++</code></td><td>incrementare</td></tr>
+          <tr><td><code>--</code></td><td>decrementare</td></tr>
+        </table>
+      </div>
+
+      <div class="cheat-card">
+        <h3>4. Operatori de comparație</h3>
+        <table class="mini-table">
+          <tr><td><code>==</code></td><td>egal</td></tr>
+          <tr><td><code>!=</code></td><td>diferit</td></tr>
+          <tr><td><code>&gt;</code></td><td>mai mare</td></tr>
+          <tr><td><code>&lt;</code></td><td>mai mic</td></tr>
+          <tr><td><code>&gt;=</code></td><td>mai mare sau egal</td></tr>
+          <tr><td><code>&lt;=</code></td><td>mai mic sau egal</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="grep-row">
+      <div class="cheat-card">
+        <h3>5. Operatori logici</h3>
+        <table class="mini-table">
+          <tr><td><code>&amp;&amp;</code></td><td>AND logic</td></tr>
+          <tr><td><code>||</code></td><td>OR logic</td></tr>
+          <tr><td><code>!</code></td><td>NOT logic</td></tr>
+          <tr><td><code>?:</code></td><td>operator ternar</td></tr>
+        </table>
+      </div>
+
+      <div class="cheat-card">
+        <h3>6. Separator personalizat</h3>
+        <pre><code>awk -F, '&#123;print $1, $4&#125;' file.csv
+awk -F: '&#123;print $1&#125;' /etc/passwd
+awk 'BEGIN &#123;FS=":"&#125; &#123;print $1&#125;' /etc/passwd</code></pre>
+
+        <p class="muted">
+          <code>-F</code> setează separatorul pentru câmpuri.
+        </p>
+      </div>
+    </div>
+
+    <div class="grep-row">
+      <div class="cheat-card">
+        <h3>7. Exemple cu condiții</h3>
+        <pre><code>awk '$3 &gt; 100 &#123;print $1, $3&#125;' sales.txt
+awk '$2 == "Cluj" &#123;print $1&#125;' students.txt
+awk 'NR &gt; 1 &#123;print $0&#125;' table.txt
+awk 'NF &gt; 3 &#123;print $0&#125;' data.txt</code></pre>
+      </div>
+
+      <div class="cheat-card">
+        <h3>8. Exemple cu calcule</h3>
+        <pre><code>awk '&#123;sum += $2&#125; END &#123;print sum&#125;' prices.txt
+awk '&#123;count++&#125; END &#123;print count&#125;' file.txt
+awk '&#123;sum += $2; count++&#125; END &#123;print sum/count&#125;' notes.txt</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <p class="warn">
+    AWK este cel mai util când datele au structură pe coloane. Dacă vrei doar să
+    cauți text, folosește <code>grep</code>. Dacă vrei să înlocuiești text, folosește
+    <code>sed</code>.
+  </p>
+</div>

@@ -1,0 +1,89 @@
+<div class="card ls-section" (mousemove)="cardMouseMove.emit($event)">
+  <div class="ls-hero">
+    <div>
+      <h2>3. Linux <span>DIRECTORY STRUCTURE</span></h2>
+      <p>
+        <code>ls</code> este comanda folosită pentru a afișa conținutul unui director.
+        În Linux, directoarele pornesc de la <code>/</code>, numit și <strong>root</strong>.
+      </p>
+    </div>
+
+    <div class="linux-badge">
+      <div class="penguin">🐧</div>
+      <strong>Linux</strong>
+      <span>directory structure</span>
+    </div>
+  </div>
+
+  <div class="linux-tree-card cheat-card">
+    <h3>1. Structura directoarelor Linux</h3>
+
+    <div class="linux-tree">
+      <div class="root-node">/</div>
+
+      <div class="tree-list">
+        <div class="tree-item"><code>bin</code><span>comenzi și executabile de bază</span></div>
+        <div class="tree-item"><code>boot</code><span>fișiere necesare pentru pornirea sistemului</span></div>
+        <div class="tree-item"><code>dev</code><span>fișiere pentru dispozitive</span></div>
+        <div class="tree-item"><code>etc</code><span>fișiere de configurare</span></div>
+        <div class="tree-item"><code>home</code><span>datele utilizatorilor</span></div>
+        <div class="tree-item"><code>lib</code><span>biblioteci și module</span></div>
+        <div class="tree-item"><code>media</code><span>medii externe montate</span></div>
+        <div class="tree-item"><code>mnt</code><span>punct temporar de montare</span></div>
+        <div class="tree-item"><code>opt</code><span>software opțional</span></div>
+        <div class="tree-item"><code>proc</code><span>procese și informații despre kernel</span></div>
+        <div class="tree-item"><code>root</code><span>home-ul utilizatorului root</span></div>
+        <div class="tree-item"><code>tmp</code><span>fișiere temporare</span></div>
+        <div class="tree-item"><code>usr</code><span>programe și date pentru utilizatori</span></div>
+        <div class="tree-item"><code>var</code><span>date variabile, de exemplu loguri</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ls-cheatsheet">
+    <div class="cheat-card">
+      <h3>2. Sintaxă de bază</h3>
+      <pre><code>ls
+ls folder/
+ls file1 file2</code></pre>
+    </div>
+
+    <div class="cheat-card">
+      <h3>3. Opțiuni utile</h3>
+      <table class="mini-table">
+        <tr><td><code>-l</code></td><td>afișare detaliată</td></tr>
+        <tr><td><code>-a</code></td><td>afișează și fișierele ascunse</td></tr>
+        <tr><td><code>-h</code></td><td>dimensiuni ușor de citit</td></tr>
+        <tr><td><code>-la</code></td><td>detalii + fișiere ascunse</td></tr>
+        <tr><td><code>-R</code></td><td>listare recursivă</td></tr>
+      </table>
+    </div>
+
+    <div class="cheat-card">
+      <h3>4. Testează exemplele importante</h3>
+      <pre><code>ls
+ls -l
+ls -a
+ls -la
+ls -lh
+ls /home/student</code></pre>
+    </div>
+
+    <div class="cheat-card">
+      <h3>5. Cum citim rezultatul lui ls -l</h3>
+      <table class="mini-table">
+        <tr><td><code>-rw-r--r--</code></td><td>permisiunile fișierului</td></tr>
+        <tr><td><code>1</code></td><td>numărul de linkuri</td></tr>
+        <tr><td><code>diana</code></td><td>owner</td></tr>
+        <tr><td><code>studenti</code></td><td>group</td></tr>
+        <tr><td><code>245</code></td><td>dimensiunea fișierului</td></tr>
+        <tr><td><code>Apr 18</code></td><td>data ultimei modificări</td></tr>
+        <tr><td><code>script.sh</code></td><td>numele fișierului</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <p class="warn">
+    Mulți useri folosesc <code>ls</code>, dar nu citesc coloanele din <code>ls -l</code>.
+  </p>
+</div>

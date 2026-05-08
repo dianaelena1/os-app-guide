@@ -1,0 +1,125 @@
+<div class="card chmod-section" (mousemove)="cardMouseMove.emit($event)">
+  <div class="chmod-hero">
+    <div>
+      <h2>4. Linux <span>FILE PERMISSIONS</span></h2>
+      <p>
+        <code>chmod</code> modifică permisiunile unui fișier sau director:
+        cine poate citi, scrie sau executa.
+      </p>
+    </div>
+
+    <div class="chmod-logo">
+      <div class="terminal-dot"></div>
+      <code>chmod</code>
+    </div>
+  </div>
+
+  <div class="permission-visual cheat-card">
+    <h3>1. Cum citim permisiunile</h3>
+
+    <div class="permission-string">
+      <span class="filetype">-</span>
+      <span class="owner">rwx</span>
+      <span class="group">rw-</span>
+      <span class="other">r--</span>
+    </div>
+
+    <div class="permission-labels">
+      <div><span class="filetype">-</span> tip fișier</div>
+      <div><span class="owner">rwx</span> user / owner</div>
+      <div><span class="group">rw-</span> group</div>
+      <div><span class="other">r--</span> others</div>
+    </div>
+  </div>
+
+  <div class="chmod-cheatsheet">
+    <div class="cheat-card">
+      <h3>2. Valori numerice</h3>
+
+      <div class="permission-boxes">
+        <div class="perm-box owner-box">
+          <h4>Owner</h4>
+          <strong>7</strong>
+          <p><code>rwx</code></p>
+          <small>4 + 2 + 1</small>
+        </div>
+
+        <div class="perm-box group-box">
+          <h4>Group</h4>
+          <strong>6</strong>
+          <p><code>rw-</code></p>
+          <small>4 + 2 + 0</small>
+        </div>
+
+        <div class="perm-box other-box">
+          <h4>Other</h4>
+          <strong>4</strong>
+          <p><code>r--</code></p>
+          <small>4 + 0 + 0</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="cheat-card">
+      <h3>3. Ce înseamnă r, w, x?</h3>
+      <table class="mini-table">
+        <tr><td><code>r</code></td><td>read</td><td><strong>4</strong></td></tr>
+        <tr><td><code>w</code></td><td>write</td><td><strong>2</strong></td></tr>
+        <tr><td><code>x</code></td><td>execute</td><td><strong>1</strong></td></tr>
+        <tr><td><code>-</code></td><td>fără permisiune</td><td><strong>0</strong></td></tr>
+      </table>
+    </div>
+
+    <div class="grep-row">
+      <div class="cheat-card">
+        <h3>4. Mod simbolic</h3>
+        <pre><code>chmod u+x script.sh
+chmod g-w file.txt
+chmod o+r notes.txt</code></pre>
+
+        <table class="mini-table">
+          <tr><td><code>u</code></td><td>user / owner</td></tr>
+          <tr><td><code>g</code></td><td>group</td></tr>
+          <tr><td><code>o</code></td><td>others</td></tr>
+          <tr><td><code>+</code></td><td>adaugă permisiune</td></tr>
+          <tr><td><code>-</code></td><td>elimină permisiune</td></tr>
+        </table>
+      </div>
+
+      <div class="cheat-card">
+        <h3>5. Mod numeric</h3>
+        <pre><code>chmod 755 script.sh
+chmod 644 report.txt
+chmod 764 backup.sh</code></pre>
+
+        <p class="muted">
+          Fiecare cifră reprezintă suma permisiunilor pentru:
+          <code>owner</code>, <code>group</code>, <code>others</code>.
+        </p>
+      </div>
+    </div>
+
+    <div class="cheat-card">
+      <h3>6. Exemple explicabile rapid</h3>
+      <table class="mini-table">
+        <tr>
+          <td><code>chmod +x script.sh</code></td>
+          <td>face scriptul executabil</td>
+        </tr>
+        <tr>
+          <td><code>chmod 755 script.sh</code></td>
+          <td>owner: rwx, group: r-x, others: r-x</td>
+        </tr>
+        <tr>
+          <td><code>chmod 644 file.txt</code></td>
+          <td>owner: rw-, group: r--, others: r--</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <p class="warn">
+    Userii confundă permisiunea de execuție cu dreptul de citire.
+    Un fișier poate fi citibil fără să fie executabil.
+  </p>
+</div>
