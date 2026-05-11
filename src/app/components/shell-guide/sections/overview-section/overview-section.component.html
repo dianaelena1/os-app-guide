@@ -1,54 +1,85 @@
-<div class="card" (mousemove)="cardMouseMove.emit($event)">
-  <h2>1. Overview</h2>
-  <p>
-    În shell scripting, multe probleme se rezolvă prin combinarea unor
-    unelte simple. Gândește fiecare comandă ca pe o piesă cu un rol clar:
-  </p>
+<div class="overview-card" (mousemove)="cardMouseMove.emit($event)">
+    <div class="overview-header">
+        <span class="section-badge">Overview</span>
 
-  <table class="table">
-    <tr>
-      <th>Tool</th>
-      <th>Utilitate</th>
-      <th>Mod de abordare</th>
-    </tr>
-    <tr>
-      <td><code>chmod</code></td>
-      <td>schimbă permisiunile</td>
-      <td>Cine are voie să citească, scrie sau execute?</td>
-    </tr>
-    <tr>
-      <td><code>grep</code></td>
-      <td>caută linii după pattern</td>
-      <td>Ce linii vrem să găsim?</td>
-    </tr>
-    <tr>
-      <td><code>sed</code></td>
-      <td>editează textul în flux</td>
-      <td>Ce vrem să transformăm?</td>
-    </tr>
-    <tr>
-      <td><code>awk</code></td>
-      <td>lucrează pe câmpuri/coloane</td>
-      <td>Ce coloane vrem să extragem sau calculăm?</td>
-    </tr>
-  </table>
+        <h2>1. Cum gândim comenzile în shell scripting?</h2>
 
-  <div class="example">
-    <div class="mini">
-      <h3>Steps</h3>
-      <ol>
-        <li>identific problema</li>
-        <li>aleg comanda principală</li>
-        <li>adaug opțiuni</li>
-        <li>combin cu pipe sau redirectare</li>
-      </ol>
+        <p>
+            În shell scripting, multe probleme se rezolvă prin combinarea unor unelte
+            simple. Gândește fiecare comandă ca pe o piesă cu un rol clar.
+        </p>
     </div>
 
-    <div class="mini">
-      <h3>Exemplu</h3>
-      <pre><code>cat log.txt | grep -i error | wc -l</code></pre>
-      <p class="muted">Mai bine, fără <code>cat</code> inutil:</p>
-      <pre><code>grep -i error log.txt | wc -l</code></pre>
+    <div class="tool-grid">
+        <article class="tool-card">
+            <div class="tool-name"><code>chmod</code></div>
+            <h3>Permisiuni</h3>
+            <p>Schimbă permisiunile pentru fișiere și directoare.</p>
+            <span>Cine are voie să citească, scrie sau execute?</span>
+        </article>
+
+        <article class="tool-card">
+            <div class="tool-name"><code>grep</code></div>
+            <h3>Căutare</h3>
+            <p>Caută linii după un pattern.</p>
+            <span>Ce linii vrem să găsim?</span>
+        </article>
+
+        <article class="tool-card">
+            <div class="tool-name"><code>sed</code></div>
+            <h3>Transformare</h3>
+            <p>Editează textul direct în flux.</p>
+            <span>Ce vrem să transformăm?</span>
+        </article>
+
+        <article class="tool-card">
+            <div class="tool-name"><code>awk</code></div>
+            <h3>Coloane</h3>
+            <p>Lucrează pe câmpuri și coloane.</p>
+            <span>Ce coloane vrem să extragem sau calculăm?</span>
+        </article>
     </div>
-  </div>
+
+    <div class="workflow-box">
+        <h3>Pași de lucru</h3>
+
+        <div class="workflow-steps">
+            <div class="workflow-step">
+                <span>1</span>
+                <p>Identific problema</p>
+            </div>
+
+            <div class="workflow-step">
+                <span>2</span>
+                <p>Aleg comanda principală</p>
+            </div>
+
+            <div class="workflow-step">
+                <span>3</span>
+                <p>Adaug opțiuni</p>
+            </div>
+
+            <div class="workflow-step">
+                <span>4</span>
+                <p>Combin cu pipe sau redirectare</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="command-example">
+        <div class="example-header">
+            <span>Exemplu</span>
+            <p>Numărăm liniile care conțin cuvântul <code>error</code>.</p>
+        </div>
+
+        <div class="bad-example">
+            <small>Funcționează, dar nu e ideal:</small>
+            <pre><code>cat log.txt | grep -i error | wc -l</code></pre>
+        </div>
+
+        <div class="good-example">
+            <small>Mai bine, fără <code>cat</code> inutil:</small>
+            <pre><code>grep -i error log.txt | wc -l</code></pre>
+        </div>
+    </div>
 </div>

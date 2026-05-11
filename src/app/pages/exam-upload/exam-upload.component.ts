@@ -29,6 +29,13 @@ export class ExamUploadComponent {
   private storage = inject(Storage);
   private firestore = inject(Firestore);
 
+  private mediaRecorder: MediaRecorder | null = null;
+  private recordedChunks: Blob[] = [];
+  private recordingStream: MediaStream | null = null;
+
+  isRecording = false;
+  recordingUrl: string | null = null;
+
   displayName$ = this.authService.displayName$;
 
   file1: File | null = null;
@@ -154,4 +161,86 @@ export class ExamUploadComponent {
       .replace(/\s+/g, '-')
       .replace(/[^a-z0-9._-]/g, '');
   }
+
+    async startScreenRecording(): Promise<void> {
+        this.errorMessage = '';
+        this.successMessage = '';
+
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) {
+            this.errorMessage = 'Browserul nu suportă screen recording.';
+            return;
+        }
+
+        try {
+            const stream = await navigator.mediaDevices.getDisplayMedia({
+                video: {
+                    frameRate: 10,
+                    width: { ideal: 1280 },
+                    height: { ideal: 720 }
+                },
+                audio: false
+            });
+
+            this.recordingStream = stream;
+            this.recordedChunks = [];
+
+            if (this.recordingUrl) {
+                URL.revokeObjectURL(this.recordingUrl);
+                this.recordingUrl = null;
+            }
+
+            this.mediaRecorder = new MediaRecorder(stream, {
+                mimeType: this.getSupportedMimeType(),
+                videoBitsPerSecond: 350_000
+            });
+
+            this.mediaRecorder.ondataavailable = (event: BlobEvent) => {
+                if (event.data && event.data.size > 0) {
+                    this.recordedChunks.push(event.data);
+                }
+            };
+
+            this.mediaRecorder.onstop = () => {
+                const blob = new Blob(this.recordedChunks, {
+                    type: this.mediaRecorder?.mimeType || 'video/webm'
+                });
+
+                this.recordingUrl = URL.createObjectURL(blob);
+
+                this.recordingStream?.getTracks().forEach(track => track.stop());
+                this.recordingStream = null;
+                this.isRecording = false;
+            };
+
+            stream.getVideoTracks()[0].onended = () => {
+                this.stopScreenRecording();
+            };
+
+            this.mediaRecorder.start();
+            this.isRecording = true;
+        } catch (error) {
+            console.error(error);
+            this.errorMessage = 'Înregistrarea a fost anulată sau nu a putut porni.';
+            this.isRecording = false;
+        }
+    }
+
+    stopScreenRecording(): void {
+        if (this.mediaRecorder && this.mediaRecorder.state !== 'inactive') {
+            this.mediaRecorder.stop();
+        }
+
+        this.recordingStream?.getTracks().forEach(track => track.stop());
+        this.isRecording = false;
+    }
+
+    private getSupportedMimeType(): string {
+        const types = [
+            'video/webm;codecs=vp9',
+            'video/webm;codecs=vp8',
+            'video/webm'
+        ];
+
+        return types.find(type => MediaRecorder.isTypeSupported(type)) || 'video/webm';
+    }
 }

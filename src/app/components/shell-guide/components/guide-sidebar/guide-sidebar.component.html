@@ -11,25 +11,70 @@
     </ul>
   </ng-container>
 
-  <ng-container *ngIf="isActiveTab('overview')">
-    <h3>Ghid rapid</h3>
-    <p class="muted">
-      Scopul acestui ghid este să vă ajute să înțelegeți mai ușor cum gândiți comenzile în shell scripting.
-    </p>
+    <ng-container *ngIf="isActiveTab('overview')">
+        <div class="quick-guide-box">
+            <div class="quick-guide-header">
+                <span class="quick-guide-kicker">Start aici</span>
+                <h3>Ghid rapid</h3>
+                <p>
+                    Scopul acestui ghid este să vă ajute să înțelegeți mai ușor cum gândiți
+                    comenzile în shell scripting.
+                </p>
+            </div>
 
-    <ul>
-      <li><strong>1. Începeți de la problemă.</strong><br />Ce vreau să obțin?</li>
-      <li><strong>2. Gândiți input-ul și output-ul.</strong><br />Ce primește comanda? Ce produce?</li>
-      <li><strong>3. Alegeți tool-ul potrivit.</strong><br /><code>grep</code>, <code>sed</code>, <code>awk</code>, <code>chmod</code>.</li>
-      <li><strong>4. Mergeți de la simplu la combinat.</strong><br />Comandă simplă → opțiuni → pipe.</li>
-      <li><strong>5. Testați cu exemple mici.</strong><br />Mai întâi pe 3–4 linii.</li>
-    </ul>
+            <div class="quick-guide-steps">
+                <div class="quick-step">
+                    <span>1</span>
+                    <div>
+                        <strong>Începeți de la problemă</strong>
+                        <p>Ce vreau să obțin?</p>
+                    </div>
+                </div>
 
-    <h3>Întrebări utile</h3>
-    <div *ngFor="let badge of badges" class="badge">
-      {{ badge.label }}
-    </div>
-  </ng-container>
+                <div class="quick-step">
+                    <span>2</span>
+                    <div>
+                        <strong>Gândiți input-ul și output-ul</strong>
+                        <p>Ce primește comanda? Ce produce?</p>
+                    </div>
+                </div>
+
+                <div class="quick-step">
+                    <span>3</span>
+                    <div>
+                        <strong>Alegeți tool-ul potrivit</strong>
+                        <p><code>grep</code>, <code>sed</code>, <code>awk</code>, <code>chmod</code></p>
+                    </div>
+                </div>
+
+                <div class="quick-step">
+                    <span>4</span>
+                    <div>
+                        <strong>Mergeți de la simplu la combinat</strong>
+                        <p>Comandă simplă → opțiuni → pipe.</p>
+                    </div>
+                </div>
+
+                <div class="quick-step">
+                    <span>5</span>
+                    <div>
+                        <strong>Testați cu exemple mici</strong>
+                        <p>Mai întâi pe 3–4 linii.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quick-questions">
+                <h3>Întrebări utile</h3>
+
+                <div class="quick-badges">
+                    <div *ngFor="let badge of badges" class="quick-badge">
+                        {{ badge.label }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
 
   <ng-container *ngIf="isActiveTab('basics')">
     <h3>Basics – ce trebuie reținut</h3>

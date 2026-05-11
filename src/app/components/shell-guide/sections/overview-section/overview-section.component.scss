@@ -1,10 +1,358 @@
-@use '../../styles/section-shared.scss';
+.overview-card {
+  position: relative;
+  overflow: hidden;
 
-.mini {
-  border-radius: 18px;
-  padding: 16px;
+  width: 100%;
+  padding: 30px;
+  border-radius: 30px;
+
+  background:
+          radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent 34%),
+          linear-gradient(180deg, rgba(15, 23, 42, 0.94), rgba(2, 6, 23, 0.94));
+
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  box-shadow:
+          0 24px 70px rgba(0, 0, 0, 0.32),
+          inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
-ol {
-  padding-left: 18px;
+.overview-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background:
+          linear-gradient(90deg, rgba(56, 189, 248, 0.13), transparent 30%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 22%);
+  opacity: 0.8;
+}
+
+.overview-header,
+.tool-grid,
+.workflow-box,
+.command-example {
+  position: relative;
+  z-index: 1;
+}
+
+.overview-header {
+  margin-bottom: 24px;
+}
+
+.section-badge {
+  display: inline-flex;
+  margin-bottom: 12px;
+  padding: 7px 12px;
+  border-radius: 999px;
+
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.32);
+  color: #7dd3fc;
+
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.overview-header h2 {
+  margin: 0;
+  color: #f8fafc;
+  font-size: clamp(1.5rem, 4vw, 2.15rem);
+  font-weight: 950;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+
+.overview-header p {
+  max-width: 760px;
+  margin: 14px 0 0;
+  color: #cbd5e1;
+  line-height: 1.7;
+}
+
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.tool-card {
+  min-width: 0;
+  padding: 18px;
+  border-radius: 22px;
+
+  background: rgba(15, 23, 42, 0.62);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+
+  transition:
+          transform 0.2s ease,
+          border-color 0.2s ease,
+          background 0.2s ease;
+}
+
+.tool-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(56, 189, 248, 0.36);
+  background: rgba(15, 23, 42, 0.85);
+}
+
+.tool-name {
+  display: inline-flex;
+  margin-bottom: 14px;
+  padding: 7px 10px;
+  border-radius: 12px;
+
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.22);
+}
+
+.tool-name code {
+  color: #bae6fd;
+  font-family: Consolas, Menlo, monospace;
+  font-weight: 900;
+}
+
+.tool-card h3 {
+  margin: 0 0 8px;
+  color: #f8fafc;
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.tool-card p {
+  margin: 0;
+  color: #cbd5e1;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.tool-card span {
+  display: block;
+  margin-top: 12px;
+  color: #93c5fd;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.workflow-box {
+  margin-top: 24px;
+  padding: 22px;
+  border-radius: 24px;
+
+  background: rgba(2, 6, 23, 0.42);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.workflow-box h3 {
+  margin: 0 0 16px;
+  color: #f8fafc;
+  font-size: 1.2rem;
+  font-weight: 950;
+}
+
+.workflow-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.workflow-step {
+  min-width: 0;
+  padding: 14px;
+  border-radius: 18px;
+
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.workflow-step span {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 10px;
+
+  border-radius: 11px;
+  background: linear-gradient(135deg, #38bdf8, #2563eb);
+  color: #020617;
+
+  font-weight: 950;
+}
+
+.workflow-step p {
+  margin: 0;
+  color: #e2e8f0;
+  line-height: 1.45;
+  font-weight: 700;
+}
+
+.command-example {
+  margin-top: 24px;
+  padding: 22px;
+  border-radius: 24px;
+
+  background:
+          radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.08), transparent 32%),
+          rgba(2, 6, 23, 0.5);
+
+  border: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.example-header span {
+  display: block;
+  color: #f8fafc;
+  font-size: 1.2rem;
+  font-weight: 950;
+}
+
+.example-header p {
+  margin: 8px 0 18px;
+  color: #cbd5e1;
+  line-height: 1.55;
+}
+
+.bad-example,
+.good-example {
+  display: grid;
+  gap: 8px;
+}
+
+.good-example {
+  margin-top: 16px;
+}
+
+.bad-example small,
+.good-example small {
+  color: #94a3b8;
+  font-weight: 800;
+}
+
+pre {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 15px 16px;
+  border-radius: 16px;
+
+  overflow-x: auto;
+
+  background: rgba(2, 6, 23, 0.78);
+  border: 1px solid rgba(56, 189, 248, 0.18);
+}
+
+pre code {
+  color: #e0f2fe;
+  font-family: Consolas, Menlo, monospace;
+  font-size: 0.95rem;
+  white-space: pre;
+}
+
+code {
+  color: #bae6fd;
+  font-family: Consolas, Menlo, monospace;
+}
+
+@media (max-width: 980px) {
+  .tool-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .workflow-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .overview-card {
+    padding: 20px;
+    border-radius: 24px;
+  }
+
+  .overview-header h2 {
+    font-size: 1.55rem;
+  }
+
+  .overview-header p {
+    font-size: 0.95rem;
+  }
+
+  .tool-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .tool-card {
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .workflow-box,
+  .command-example {
+    padding: 18px;
+    border-radius: 22px;
+  }
+
+  .workflow-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .workflow-step {
+    padding: 13px;
+  }
+
+  pre {
+    padding: 13px;
+  }
+
+  pre code {
+    font-size: 0.86rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .overview-card {
+    padding-bottom: 36px;
+  }
+
+  .workflow-box {
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .workflow-box h3 {
+    margin-bottom: 14px;
+    font-size: 1.05rem;
+  }
+
+  .workflow-steps {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .workflow-step {
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    align-items: center;
+    gap: 10px;
+
+    padding: 12px 13px;
+    border-radius: 16px;
+  }
+
+  .workflow-step span {
+    width: 28px;
+    height: 28px;
+    margin-bottom: 0;
+    border-radius: 10px;
+    font-size: 0.85rem;
+  }
+
+  .workflow-step p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.35;
+  }
 }
