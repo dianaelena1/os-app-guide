@@ -35,6 +35,7 @@ export class ExamUploadComponent {
 
   isRecording = false;
   recordingUrl: string | null = null;
+  recordingMessage = '';
 
   displayName$ = this.authService.displayName$;
 
@@ -165,6 +166,7 @@ export class ExamUploadComponent {
     async startScreenRecording(): Promise<void> {
         this.errorMessage = '';
         this.successMessage = '';
+        this.recordingMessage = '';
 
         if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) {
             this.errorMessage = 'Browserul nu suportă screen recording.';
@@ -207,6 +209,9 @@ export class ExamUploadComponent {
 
                 this.recordingUrl = URL.createObjectURL(blob);
 
+                const sizeMb = (blob.size / 1024 / 1024).toFixed(2);
+                this.recordingMessage = `Înregistrarea este gata. Dimensiune: ${sizeMb} MB.`;
+
                 this.recordingStream?.getTracks().forEach(track => track.stop());
                 this.recordingStream = null;
                 this.isRecording = false;
@@ -216,17 +221,22 @@ export class ExamUploadComponent {
                 this.stopScreenRecording();
             };
 
-            this.mediaRecorder.start();
+            // Important: salvează bucăți de video la fiecare secundă
+            this.mediaRecorder.start(1000);
+
             this.isRecording = true;
+            this.recordingMessage = 'Înregistrarea a pornit.';
         } catch (error) {
             console.error(error);
             this.errorMessage = 'Înregistrarea a fost anulată sau nu a putut porni.';
             this.isRecording = false;
+            this.recordingMessage = '';
         }
     }
 
     stopScreenRecording(): void {
         if (this.mediaRecorder && this.mediaRecorder.state !== 'inactive') {
+            this.recordingMessage = 'Se generează fișierul video...';
             this.mediaRecorder.stop();
         }
 

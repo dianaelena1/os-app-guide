@@ -28,33 +28,44 @@
         </div>
 
         <section class="recording-panel">
-            <div class="recording-text">
+            <div class="recording-info">
                 <span class="recording-badge">Obligatoriu</span>
 
                 <h2>Screen recording</h2>
 
-                <p>
-                    Pornește înregistrarea ecranului direct din browser înainte să începi
-                    rezolvarea.
+                <p class="recording-intro">
+                    Pornește înregistrarea ecranului înainte să începi rezolvarea examenului.
                 </p>
 
-                <p class="recording-warning">
-                    Important! Nu ieșiți din pagina examenului, pentru ca înregistrarea să se poată genera corect.
-                </p>
+                <div class="recording-steps">
+                    <div class="recording-step">
+                        <span>1</span>
+                        <p>Apasă <strong>Start recording</strong>.</p>
+                    </div>
 
-                <p>
-                    La final, apasă mai întâi <strong>Stop sharing</strong> din bara browserului,
-                    apoi <strong>Stop recording</strong> în aplicație.
-                </p>
+                    <div class="recording-step">
+                        <span>2</span>
+                        <p>Alege share Entire Screen când browserul cere permisiunea.</p>
+                    </div>
 
-                <small>
-                    După oprire, va apărea butonul „Descarcă înregistrarea”.
-                    Recomandare: când browserul întreabă ce vrei să înregistrezi,
-                    alege doar tab-ul aplicației.
-                </small>
+                    <div class="recording-step warning">
+                        <span>!</span>
+                        <p>Nu ieși din pagina examenului până când înregistrarea este pornită.</p>
+                    </div>
+
+                    <div class="recording-step">
+                        <span>3</span>
+                        <p>
+                            La final, apasă <strong>Stop sharing</strong> în browser, apoi
+                            <strong>Generează fișierul în browser</strong>.
+                        </p>
+                    </div>
+                </div>
             </div>
 
-            <div class="recording-actions">
+            <div class="recording-actions-card">
+                <h3>Control înregistrare</h3>
+
                 <button
                         type="button"
                         class="record-button start"
@@ -72,6 +83,10 @@
                 >
                     Generează fișierul
                 </button>
+
+                <p class="recording-status" *ngIf="recordingMessage">
+                    {{ recordingMessage }}
+                </p>
 
                 <a
                         *ngIf="recordingUrl"
