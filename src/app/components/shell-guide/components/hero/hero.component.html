@@ -7,6 +7,9 @@
   </div>
 
   <div class="intro-content">
+      <p class="welcome-text" *ngIf="displayName$ | async as displayName">
+          Welcome, {{ displayName }} to
+      </p>
     <h2 class="typing-title" aria-label="Operating Systems Guide">
       <span class="typing-text">Operating Systems Guide</span>
     </h2>

@@ -244,3 +244,47 @@
     animation-delay: 0.8s;
   }
 }
+.welcome-text {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto 18px;
+
+  font-family: Consolas, Menlo, monospace;
+  font-size: clamp(1rem, 2.2vw, 1.55rem);
+  font-weight: 900;
+  color: #f8fafc;
+  letter-spacing: 0.12em;
+  text-transform: none;
+  text-shadow: 0 0 18px rgba(248, 250, 252, 0.22);
+
+  opacity: 0;
+  transform: translateY(10px);
+  animation: welcomeReveal 0.7s ease 0.15s forwards;
+}
+
+@keyframes welcomeReveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+:host-context(.light-mode) .welcome-text {
+  color: #0f172a;
+  text-shadow: none;
+}
+
+@media (max-width: 700px) {
+  .welcome-text {
+    margin-bottom: 14px;
+    font-size: clamp(0.9rem, 4.8vw, 1.25rem);
+    letter-spacing: 0.08em;
+    text-align: center;
+  }
+}
