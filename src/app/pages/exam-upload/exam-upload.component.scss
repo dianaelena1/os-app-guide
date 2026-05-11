@@ -479,3 +479,16 @@ button,
     border-radius: 22px;
   }
 }
+
+.recording-warning {
+  margin: 12px 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #fecaca;
+
+  font-weight: 900;
+  line-height: 1.45;
+}
