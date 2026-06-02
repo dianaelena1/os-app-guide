@@ -1,42 +1,57 @@
 <div class="guide-menu-wrap">
-  <nav class="floating-menu">
-    <div class="menu-left">
-      <button
-        *ngFor="let tab of tabs"
-        type="button"
-        class="menu-tab"
-        [class.active]="activeTab === tab.id"
-        [class.exam-tab]="tab.id === 'exam'"
-        [class.grades-tab]="tab.id === 'grades'"
-        (click)="handleTabClick(tab.id)"
-      >
-        {{ tab.label }}
-      </button>
+    <div class="top-actions">
+        <button type="button" class="top-icon" (click)="themeToggled.emit()">
+            {{ theme === 'dark' ? '☀️' : '🌙' }}
+        </button>
+
+        <div class="user-menu">
+            <button
+                    type="button"
+                    class="top-user"
+                    (click)="userMenuToggled.emit()"
+                    *ngIf="displayName$ | async as displayName"
+            >
+                <span class="user-symbol">👤</span>
+            </button>
+
+            <div class="user-dropdown" *ngIf="isUserMenuOpen">
+                <button type="button" (click)="openSettings()">Settings</button>
+                <button type="button" (click)="logoutClicked.emit()">Log out</button>
+            </div>
+        </div>
     </div>
 
-    <div class="menu-right">
-      <button type="button" class="menu-icon" (click)="themeToggled.emit()">
-    {{ theme === 'dark' ? '☀️' : '🌙' }}
-  </button>
+    <nav class="floating-menu">
+        <button
+                type="button"
+                class="menu-arrow left"
+                aria-label="Scroll menu left"
+                (click)="scrollTabs(-500)"
+        >
+            ‹
+        </button>
 
-  <div class="user-menu">
-    <button
-      type="button"
-      class="logged-user"
-      (click)="userMenuToggled.emit()"
-      *ngIf="displayName$ | async as displayName"
-    >
-      <span class="user-symbol">👤</span>
-      <span>{{ displayName }}</span>
-    </button>
+        <div #tabsContainer class="menu-left">
+            <button
+                    *ngFor="let tab of tabs"
+                    type="button"
+                    class="menu-tab"
+                    [class.active]="activeTab === tab.id"
+                    [class.exam-tab]="tab.id === 'exam'"
+                    [class.grades-tab]="tab.id === 'grades'"
+                    (click)="handleTabClick(tab.id)"
+            >
+                {{ tab.label }}
+            </button>
+        </div>
 
-    <div class="user-dropdown" *ngIf="isUserMenuOpen">
-      <button type="button" (click)="openSettings()">
-        Settings
-      </button>
-      <button type="button" (click)="logoutClicked.emit()">Log out</button>
-    </div>
-  </div>
-</div>
-  </nav>
+        <button
+                type="button"
+                class="menu-arrow right"
+                aria-label="Scroll menu right"
+                (click)="scrollTabs(500)"
+        >
+            ›
+        </button>
+    </nav>
 </div>

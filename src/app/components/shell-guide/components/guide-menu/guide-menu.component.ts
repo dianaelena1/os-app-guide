@@ -1,5 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  Output,
+  ElementRef,
+  ViewChild
+} from '@angular/core';
+
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../services/auth.service';
 import { GuideTab } from '../../../../models/guide.models';
@@ -27,29 +36,39 @@ export class GuideMenuComponent {
   @Output() userMenuToggled = new EventEmitter<void>();
   @Output() logoutClicked = new EventEmitter<void>();
 
+  @ViewChild('tabsContainer')
+  tabsContainer!: ElementRef<HTMLDivElement>;
+
   openGrades(): void {
     window.open(
-      'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8yZq2QGlWw984Ix881zY39DUOMSfpE1JcAlcY_WZnLNchu8Ld-wrwSrb5drEZT7o0hzY57LIKZ2X9/pubhtml?gid=334396870&single=true',
-      '_blank',
-      'noopener,noreferrer'
+        'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8yZq2QGlWw984Ix881zY39DUOMSfpE1JcAlcY_WZnLNchu8Ld-wrwSrb5drEZT7o0hzY57LIKZ2X9/pubhtml?gid=334396870&single=true',
+        '_blank',
+        'noopener,noreferrer'
     );
   }
 
   handleTabClick(tabId: string): void {
-  if (tabId === 'grades') {
-    this.openGrades();
-    return;
+    if (tabId === 'grades') {
+      this.openGrades();
+      return;
+    }
+
+    if (tabId === 'exam') {
+      this.router.navigate(['/exam']);
+      return;
+    }
+
+    this.tabSelected.emit(tabId);
   }
 
-  if (tabId === 'exam') {
-    this.router.navigate(['/exam']);
-    return;
+  openSettings(): void {
+    this.router.navigate(['/settings']);
   }
 
-  this.tabSelected.emit(tabId);
-}
-
-openSettings(): void {
-  this.router.navigate(['/settings']);
-}
+  scrollTabs(amount: number): void {
+    this.tabsContainer.nativeElement.scrollBy({
+      left: amount,
+      behavior: 'smooth'
+    });
+  }
 }
