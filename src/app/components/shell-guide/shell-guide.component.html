@@ -59,6 +59,16 @@
           (cardMouseMove)="onMouseMove($event)"
         ></app-c-section>
 
+          <app-processes-section
+                  *ngIf="isActiveTab('processes')"
+                  (cardMouseMove)="onMouseMove($event)"
+          ></app-processes-section>
+
+          <app-pipes-section
+                  *ngIf="isActiveTab('pipes')"
+                  (cardMouseMove)="onMouseMove($event)"
+          ></app-pipes-section>
+
         <app-quiz-section
           *ngIf="isActiveTab('quiz')"
           [quizQuestions]="quizQuestions"

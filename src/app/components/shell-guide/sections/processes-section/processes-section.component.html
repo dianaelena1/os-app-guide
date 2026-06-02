@@ -1,0 +1,186 @@
+<div class="card processes-section" (mousemove)="cardMouseMove.emit($event)">
+    <div class="section-hero">
+        <div>
+            <p class="eyebrow">Lab 9 • C Programming</p>
+            <h2>9. Processes <span>in C</span></h2>
+            <p>
+                În Linux, un proces este o instanță a unui program aflat în execuție.
+                Fiecare proces are propriul PID, memorie proprie, descriptori de fișiere
+                și poate crea procese copil folosind <code>fork()</code>.
+            </p>
+        </div>
+
+        <div class="section-logo">
+            <code>fork()</code>
+        </div>
+    </div>
+
+    <div class="cheat-card lesson-card compact-card">
+        <div class="lesson-text">
+            <h3>1. Ce este un proces?</h3>
+
+            <p>
+                Un proces rulează în spațiul utilizator și comunică cu sistemul de operare
+                prin apeluri de sistem. Kernelul gestionează memoria, fișierele, driverele
+                și mecanismele de comunicare între procese.
+            </p>
+
+            <div class="info-grid">
+                <div><strong>PID</strong><span>Process ID</span></div>
+                <div><strong>PPID</strong><span>Parent Process ID</span></div>
+                <div><strong>UID</strong><span>User ID</span></div>
+                <div><strong>FD</strong><span>File descriptors</span></div>
+            </div>
+        </div>
+
+        <div class="image-panel diagram-only">
+            <img
+                    src="assets/images/labs/lab9/process-overview.png"
+                    alt="System architecture and IPC"
+            />
+        </div>
+
+        <div class="cheat-card">
+            <h3>2. Crearea unui proces cu fork()</h3>
+
+            <p>
+                Funcția <code>fork()</code> duplică procesul curent.
+                După apel există două procese care continuă execuția:
+                procesul părinte și procesul copil.
+            </p>
+
+
+            <table class="mini-table">
+                <tr>
+                    <td><code>pid &lt; 0</code></td>
+                    <td>eroare la crearea procesului</td>
+                </tr>
+                <tr>
+                    <td><code>pid == 0</code></td>
+                    <td>cod executat în procesul copil</td>
+                </tr>
+                <tr>
+                    <td><code>pid &gt; 0</code></td>
+                    <td>cod executat în procesul părinte</td>
+                </tr>
+            </table>
+
+            <div class="fork-diagram">
+                <img
+                        src="assets/images/labs/lab9/fork-process.png"
+                        alt="fork diagram"
+                />
+            </div>
+
+            <div class="exam-tip">
+                După apelul <code>fork()</code>,
+                atât părintele cât și copilul continuă execuția
+                din instrucțiunea următoare.
+            </div>
+        </div>
+
+    <div class="cheat-card">
+        <h3>3. Așteptarea copilului cu wait()</h3>
+
+        <p>
+            Părintele folosește <code>wait()</code> pentru a aștepta terminarea procesului copil.
+            Dacă părintele nu colectează copilul terminat, acesta poate rămâne temporar
+            ca proces zombie.
+        </p>
+
+        <pre><code>#include &lt;sys/wait.h&gt;
+
+wait(NULL);</code></pre>
+
+        <div class="exam-tip">
+            Pentru examen: dacă ai proces părinte și copil, verifică mereu unde trebuie pus
+            <code>wait(NULL)</code>.
+        </div>
+    </div>
+
+    <div class="cheat-card lesson-card">
+        <div class="lesson-text">
+            <h3>4. Comunicarea prin semnale</h3>
+
+            <p>
+                Un semnal este un mesaj trimis de sistem sau de un proces către alt proces.
+                Semnalele nu sunt folosite pentru transfer de date, ci pentru notificare
+                sau control.
+            </p>
+
+            <div class="signal-list">
+                <div><code>SIGTERM</code><span>cere terminarea procesului</span></div>
+                <div><code>SIGKILL</code><span>oprește forțat procesul</span></div>
+                <div><code>SIGSTOP</code><span>suspendă procesul</span></div>
+                <div><code>SIGCONT</code><span>reia procesul suspendat</span></div>
+            </div>
+        </div>
+
+        <div class="image-panel medium">
+            <img
+                    src="assets/images/labs/lab9/signals-overview.png"
+                    alt="Communication between processes using signals"
+            />
+        </div>
+    </div>
+
+    <div class="cheat-card lesson-card">
+        <div class="lesson-text">
+            <h3>5. Ce se întâmplă când un proces primește un semnal?</h3>
+
+            <p>
+                Procesul poate executa acțiunea implicită, poate rula un handler personalizat
+                sau poate ignora semnalul, dacă semnalul permite acest lucru.
+            </p>
+
+            <div class="info-grid three">
+                <div><strong>Default</strong><span>se execută acțiunea implicită</span></div>
+                <div><strong>Handler</strong><span>se rulează o funcție proprie</span></div>
+                <div><strong>Ignore</strong><span>procesul ignoră semnalul</span></div>
+            </div>
+        </div>
+
+        <div class="image-panel medium">
+            <img
+                    src="assets/images/labs/lab9/signal-handling.png"
+                    alt="Handling signals"
+            />
+        </div>
+    </div>
+
+    <div class="cheat-card lesson-card">
+        <div class="lesson-text">
+            <h3>6. Trimiterea semnalelor cu kill()</h3>
+
+            <p>
+                Funcția <code>kill()</code> trimite un semnal către un proces sau către un grup
+                de procese. Numele poate induce în eroare: <code>kill()</code> nu omoară mereu
+                procesul, ci trimite un semnal.
+            </p>
+
+            <pre><code>#include &lt;sys/types.h&gt;
+#include &lt;signal.h&gt;
+
+int kill(pid_t pid, int sig);</code></pre>
+        </div>
+
+        <div class="image-panel medium">
+            <img
+                    src="assets/images/labs/lab9/kill-signals.png"
+                    alt="Sending signals with kill"
+            />
+        </div>
+    </div>
+
+    <div class="cheat-card warning-card">
+        <h3>7. Pentru examen</h3>
+
+        <ul>
+            <li>Identifică procesul părinte și procesul copil.</li>
+            <li>Verifică ce returnează <code>fork()</code>.</li>
+            <li>Pune <code>wait(NULL)</code> în procesul părinte.</li>
+            <li>Nu confunda semnalele cu pipe-urile.</li>
+            <li>Semnalele controlează procesele, pipe-urile transferă date.</li>
+        </ul>
+    </div>
+</div>

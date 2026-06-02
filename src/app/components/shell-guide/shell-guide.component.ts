@@ -22,6 +22,8 @@ import { SedSectionComponent } from './sections/sed-section/sed-section.componen
 import { AwkSectionComponent } from './sections/awk-section/awk-section.component';
 import { CSectionComponent } from './sections/c-section/c-section.component';
 import { QuizSectionComponent } from './sections/quiz-section/quiz-section.component';
+import { ProcessesSectionComponent } from './sections/processes-section/processes-section.component';
+import { PipesSectionComponent } from './sections/pipes-section/pipes-section.component';
 
 @Component({
   selector: 'app-shell-guide',
@@ -42,7 +44,9 @@ import { QuizSectionComponent } from './sections/quiz-section/quiz-section.compo
     SedSectionComponent,
     AwkSectionComponent,
     CSectionComponent,
-    QuizSectionComponent
+    QuizSectionComponent,
+    ProcessesSectionComponent,
+    PipesSectionComponent
   ],
   templateUrl: './shell-guide.component.html',
   styleUrl: './shell-guide.component.scss'

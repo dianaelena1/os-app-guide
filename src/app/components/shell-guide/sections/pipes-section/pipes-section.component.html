@@ -1,0 +1,283 @@
+<div class="card pipes-section" (mousemove)="cardMouseMove.emit($event)">
+    <div class="section-hero">
+        <div>
+            <p class="eyebrow">Lab 10 • IPC in C</p>
+            <h2>10. Pipes <span>& FIFO</span></h2>
+            <p>
+                Pipe-urile permit comunicarea între procese. Un pipe este un canal
+                unidirecțional: un proces scrie date, iar alt proces le citește.
+            </p>
+        </div>
+
+        <div class="section-logo">
+            <code>pipe()</code>
+        </div>
+    </div>
+
+    <div class="cheat-card">
+        <h3>1. What is a Pipe?</h3>
+
+        <p>
+            Un <code>pipe</code> este un canal de comunicare între procese.
+            Datele sunt scrise într-un capăt și citite din celălalt capăt.
+        </p>
+
+        <div class="pipe-flow">
+            <div class="process-box writer">
+                <strong>Process 1</strong>
+                <span>scrie</span>
+            </div>
+
+            <div class="arrow-block">
+                <code>write()</code>
+                <span>fd[1]</span>
+            </div>
+
+            <div class="pipe-core">PIPE</div>
+
+            <div class="arrow-block">
+                <code>read()</code>
+                <span>fd[0]</span>
+            </div>
+
+            <div class="process-box reader">
+                <strong>Process 2</strong>
+                <span>citește</span>
+            </div>
+        </div>
+
+        <div class="exam-tip">
+            Important: un pipe normal permite comunicare într-o singură direcție.
+        </div>
+    </div>
+
+    <div class="cheat-card">
+        <h3>2. pipe()</h3>
+
+        <p>
+            Funcția <code>pipe()</code> creează doi descriptori de fișier:
+            unul pentru citire și unul pentru scriere.
+        </p>
+
+        <pre><code>#include &lt;unistd.h&gt;
+
+int fd[2];
+
+if (pipe(fd) == -1) &#123;
+    perror("pipe");
+    return 1;
+&#125;</code></pre>
+
+        <table class="mini-table">
+            <tr>
+                <td><code>fd[0]</code></td>
+                <td>capătul de citire al pipe-ului</td>
+            </tr>
+            <tr>
+                <td><code>fd[1]</code></td>
+                <td>capătul de scriere al pipe-ului</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="cheat-card">
+        <h3>3. How Pipes Work</h3>
+
+        <p>
+            Pipe-ul funcționează ca o coadă: primul mesaj scris este primul mesaj citit.
+            De aceea spunem că respectă principiul <strong>FIFO</strong>:
+            <em>First In, First Out</em>.
+        </p>
+
+        <div class="fifo-flow">
+            <div>
+                <strong>1</strong>
+                <span>write(fd[1])</span>
+            </div>
+
+            <div>
+                <strong>2</strong>
+                <span>Kernel buffer</span>
+            </div>
+
+            <div>
+                <strong>3</strong>
+                <span>read(fd[0])</span>
+            </div>
+        </div>
+
+        <div class="exam-tip">
+            Datele nu merg automat înapoi. Pentru răspuns în direcția opusă ai nevoie
+            de un al doilea pipe.
+        </div>
+    </div>
+
+    <div class="cheat-card">
+        <h3>4. Pipe + fork()</h3>
+
+        <p>
+            De obicei, pipe-ul este creat înainte de <code>fork()</code>.
+            După <code>fork()</code>, atât părintele cât și copilul au acces la aceiași
+            descriptori <code>fd[0]</code> și <code>fd[1]</code>.
+        </p>
+
+        <div class="fork-pipe-diagram">
+            <div class="process-column">
+                <strong>Parent</strong>
+                <code>fd[0]</code>
+                <code>fd[1]</code>
+            </div>
+
+            <div class="fork-center">
+                <span>fork()</span>
+                <div class="shared-pipe">PIPE</div>
+            </div>
+
+            <div class="process-column">
+                <strong>Child</strong>
+                <code>fd[0]</code>
+                <code>fd[1]</code>
+            </div>
+        </div>
+
+        <pre><code>int fd[2];
+pipe(fd);
+
+pid_t pid = fork();</code></pre>
+    </div>
+
+    <div class="cheat-card">
+        <h3>5. read() / write()</h3>
+
+        <p>
+            După <code>fork()</code>, fiecare proces trebuie să închidă capătul pe care
+            nu îl folosește. Altfel, programul se poate bloca.
+        </p>
+
+        <div class="rules-grid">
+            <div>
+                <strong>Procesul care citește</strong>
+                <span>închide capătul de scriere</span>
+                <code>close(fd[1]);</code>
+            </div>
+
+            <div>
+                <strong>Procesul care scrie</strong>
+                <span>închide capătul de citire</span>
+                <code>close(fd[0]);</code>
+            </div>
+        </div>
+
+        <div class="grep-row">
+            <div class="cheat-card inner-card">
+                <h4>Writer</h4>
+
+                <pre><code>close(fd[0]);
+
+char msg[] = "Salut";
+write(fd[1], msg, strlen(msg) + 1);
+
+close(fd[1]);</code></pre>
+            </div>
+
+            <div class="cheat-card inner-card">
+                <h4>Reader</h4>
+
+                <pre><code>close(fd[1]);
+
+char buffer[100];
+read(fd[0], buffer, sizeof(buffer));
+
+close(fd[0]);</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="cheat-card">
+        <h3>6. FIFO</h3>
+
+        <p>
+            FIFO înseamnă <strong>named pipe</strong>. Spre deosebire de un pipe normal,
+            FIFO are un nume în sistemul de fișiere și poate fi folosit între două programe
+            diferite, de exemplu un client și un server.
+        </p>
+
+        <div class="fifo-diagram">
+            <div>Program A</div>
+            <span>open()</span>
+            <div class="fifo-box">fifo1</div>
+            <span>open()</span>
+            <div>Program B</div>
+        </div>
+    </div>
+
+    <div class="cheat-card">
+        <h3>7. mkfifo()</h3>
+
+        <p>
+            Funcția <code>mkfifo()</code> creează un FIFO în sistemul de fișiere.
+            După aceea, acesta poate fi deschis cu <code>open()</code>.
+        </p>
+
+        <pre><code>#include &lt;sys/stat.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;unistd.h&gt;
+
+mkfifo("fifo1", 0666);</code></pre>
+
+        <div class="grep-row">
+            <div class="cheat-card inner-card">
+                <h4>Server - citește</h4>
+
+                <pre><code>int fd = open("fifo1", O_RDONLY);
+
+char buffer[100];
+read(fd, buffer, sizeof(buffer));
+
+close(fd);</code></pre>
+            </div>
+
+            <div class="cheat-card inner-card">
+                <h4>Client - scrie</h4>
+
+                <pre><code>int fd = open("fifo1", O_WRONLY);
+
+char msg[] = "Salut server";
+write(fd, msg, strlen(msg) + 1);
+
+close(fd);</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="cheat-card warning-card">
+        <h3>8. Common Exam Mistakes</h3>
+
+        <div class="mistakes-grid">
+            <div>
+                <strong>read(fd[1])</strong>
+                <span>Greșit: <code>fd[1]</code> este pentru scriere.</span>
+            </div>
+
+            <div>
+                <strong>write(fd[0])</strong>
+                <span>Greșit: <code>fd[0]</code> este pentru citire.</span>
+            </div>
+
+            <div>
+                <strong>Uiți close()</strong>
+                <span>Programul poate rămâne blocat în <code>read()</code>.</span>
+            </div>
+
+            <div>
+                <strong>Uiți wait()</strong>
+                <span>Procesul copil poate deveni zombie.</span>
+            </div>
+
+            <div>
+                <strong>Un singur pipe pentru două direcții</strong>
+                <span>Pentru comunicare bidirecțională ai nevoie de două pipe-uri.</span>
+            </div>
+        </div>
+    </div>
+</div>
